@@ -1,0 +1,787 @@
+{
+  "MENU": [
+    {
+      "id": 1,
+      "category": "Pizza",
+      "name": "Margherita Royale",
+      "desc": "A classic Italian pizza with San Marzano tomatoes, fresh mozzarella cheese, basil leaves, and extra virgin olive oil.",
+      "price": 179,
+      "rating": 4.8,
+      "time": "25-30 min",
+      "img": "https://res.cloudinary.com/dyoht5hxt/image/upload/f_auto,q_auto,w_500,h_400,c_fill/v1780460244/Margherita-Royale_go5p4a.png",
+      "badge": "Bestseller",
+      "veg": true
+    },
+    {
+      "id": 2,
+      "category": "Pizza",
+      "name": "BBQ Chicken Blaze",
+      "desc": "A smoky pizza topped with BBQ sauce, grilled chicken, red onions, and cheddar cheese.",
+      "price": 299,
+      "rating": 4.7,
+      "time": "25-35 min",
+      "img": "https://res.cloudinary.com/dyoht5hxt/image/upload/f_auto,q_auto,w_500,h_400,c_fill/v1780460236/BBQ-Chicken-Blaze_e5vbji.png",
+      "badge": "Spicy 🌶",
+      "veg": false
+    },
+    {
+      "id": 3,
+      "category": "Pizza",
+      "name": "Pepperoni Storm",
+      "desc": "Loaded with double pepperoni, jalapeños, mozzarella cheese, and an oregano-flavored crust.",
+      "price": 319,
+      "rating": 4.9,
+      "time": "20-30 min",
+      "img": "https://res.cloudinary.com/dyoht5hxt/image/upload/f_auto,q_auto,w_500,h_400,c_fill/v1780460251/Pepperoni-Storm_aq73na.png",
+      "badge": "Hot Pick",
+      "veg": false
+    },
+    {
+      "id": 4,
+      "category": "Pizza",
+      "name": "Truffle Mushroom",
+      "desc": "A gourmet pizza with wild mushrooms, truffle oil, goat cheese, and fresh arugula.",
+      "price": 349,
+      "rating": 4.6,
+      "time": "30-35 min",
+      "img": "https://res.cloudinary.com/dyoht5hxt/image/upload/f_auto,q_auto,w_500,h_400,c_fill/v1780460255/Truffle-Mushroom_i5d8w5.png",
+      "badge": "Chef's Special",
+      "veg": true
+    },
+    {
+      "id": 5,
+      "category": "Pizza",
+      "name": "Four Cheese Dream",
+      "desc": "A rich blend of mozzarella, cheddar, parmesan, and gorgonzola cheeses.",
+      "price": 329,
+      "rating": 4.8,
+      "time": "25-30 min",
+      "img": "https://res.cloudinary.com/dyoht5hxt/image/upload/f_auto,q_auto,w_500,h_400,c_fill/v1780460244/Four-Cheese-Dream_uqqm2m.png",
+      "badge": null,
+      "veg": true
+    },
+    {
+      "id": 6,
+      "category": "Pizza",
+      "name": "Veggie Garden",
+      "desc": "A fresh pizza topped with capsicum, corn, olives, cherry tomatoes, and pesto sauce.",
+      "price": 259,
+      "rating": 4.5,
+      "time": "20-25 min",
+      "img": "https://res.cloudinary.com/dyoht5hxt/image/upload/f_auto,q_auto,w_500,h_400,c_fill/v1780460255/Veggie-Garden_kz42a4.png",
+      "badge": null,
+      "veg": true
+    },
+    {
+      "id": 7,
+      "category": "Burger",
+      "name": "Classic Smash Burger",
+      "desc": "A juicy double smash patty burger with American cheese, pickles, and a special house sauce.",
+      "price": 99,
+      "rating": 4.7,
+      "time": "15-20 min",
+      "img": "https://res.cloudinary.com/dyoht5hxt/image/upload/f_auto,q_auto,w_500,h_400,c_fill/v1780460238/Classic-Smash-Burger_amwrwx.png",
+      "badge": "Bestseller",
+      "veg": false
+    },
+    {
+      "id": 8,
+      "category": "Burger",
+      "name": "Crispy Chicken Crunch",
+      "desc": "Crispy fried chicken with coleslaw and honey mustard sauce in a soft brioche bun.",
+      "price": 129,
+      "rating": 4.8,
+      "time": "15-20 min",
+      "img": "https://res.cloudinary.com/dyoht5hxt/image/upload/f_auto,q_auto,w_500,h_400,c_fill/v1780460236/Crispy-Chicken-Crunch_yom5yu.png",
+      "badge": "Hot Pick",
+      "veg": false
+    },
+    {
+      "id": 9,
+      "category": "Burger",
+      "name": "Mushroom Swiss Melt",
+      "desc": "A savory burger with a beef patty, Swiss cheese, sautéed mushrooms, and truffle mayonnaise.",
+      "price": 149,
+      "rating": 4.6,
+      "time": "15-25 min",
+      "img": "https://res.cloudinary.com/dyoht5hxt/image/upload/f_auto,q_auto,w_500,h_400,c_fill/v1780460244/Mushroom-Swiss-Melt_nlpm6i.png",
+      "badge": null,
+      "veg": false
+    },
+    {
+      "id": 10,
+      "category": "Burger",
+      "name": "Spicy Volcano Burger",
+      "desc": "A fiery burger with a jalapeño patty, habanero sauce, pepper jack cheese, and crispy onions.",
+      "price": 169,
+      "rating": 4.5,
+      "time": "15-20 min",
+      "img": "https://res.cloudinary.com/dyoht5hxt/image/upload/f_auto,q_auto,w_500,h_400,c_fill/v1780460250/Spicy-Volcano-Burger_xvnkor.png",
+      "badge": "Spicy 🌶",
+      "veg": false
+    },
+    {
+      "id": 11,
+      "category": "Burger",
+      "name": "Veg Pattie Supreme",
+      "desc": "A vegetarian burger with a black bean patty, avocado, lettuce, and chipotle mayo.",
+      "price": 79,
+      "rating": 4.4,
+      "time": "15-20 min",
+      "img": "https://res.cloudinary.com/dyoht5hxt/image/upload/f_auto,q_auto,w_500,h_400,c_fill/v1780460253/Veg-Pattie-Supreme_tqaq3t.png",
+      "badge": null,
+      "veg": true
+    },
+    {
+      "id": 12,
+      "category": "Burger",
+      "name": "BBQ Bacon Tower",
+      "desc": "A loaded burger with triple patties, crispy bacon, BBQ onion rings, and cheddar cheese.",
+      "price": 199,
+      "rating": 4.9,
+      "time": "20-25 min",
+      "img": "https://res.cloudinary.com/dyoht5hxt/image/upload/f_auto,q_auto,w_500,h_400,c_fill/v1780460233/BBQ-Bacon-Tower_ftrg2x.png",
+      "badge": "Loaded!",
+      "veg": false
+    },
+    {
+      "id": 13,
+      "category": "Drinks",
+      "name": "Mango Chiller",
+      "desc": "A refreshing drink made with fresh Alphonso mango, crushed ice, mint, and a tangy tajin rim.",
+      "price": 89,
+      "rating": 4.8,
+      "time": "5-10 min",
+      "img": "https://res.cloudinary.com/dyoht5hxt/image/upload/f_auto,q_auto,w_500,h_400,c_fill/v1780460244/Mango-Chiller_viabwr.png",
+      "badge": "Summer Fav",
+      "veg": true
+    },
+    {
+      "id": 14,
+      "category": "Drinks",
+      "name": "Classic Cola Float",
+      "desc": "Chilled cola topped with vanilla ice cream and a cherry garnish.",
+      "price": 99,
+      "rating": 4.6,
+      "time": "5 min",
+      "img": "https://res.cloudinary.com/dyoht5hxt/image/upload/f_auto,q_auto,w_500,h_400,c_fill/v1780460237/Classic-Cola-Float_web4oj.png",
+      "badge": null,
+      "veg": true
+    },
+    {
+      "id": 15,
+      "category": "Drinks",
+      "name": "Blue Lagoon Blast",
+      "desc": "A vibrant mix of blue curacao, lemonade, sparkling water, and citrus zest.",
+      "price": 109,
+      "rating": 4.7,
+      "time": "5-10 min",
+      "img": "https://res.cloudinary.com/dyoht5hxt/image/upload/f_auto,q_auto,w_500,h_400,c_fill/v1780460235/Blue-Lagoon-Blast_vdvqxv.png",
+      "badge": "Trending",
+      "veg": true
+    },
+    {
+      "id": 16,
+      "category": "Drinks",
+      "name": "Strawberry Lemonade",
+      "desc": "Fresh strawberries blended with hand-squeezed lemon juice and sugar syrup.",
+      "price": 95,
+      "rating": 4.9,
+      "time": "5-10 min",
+      "img": "https://res.cloudinary.com/dyoht5hxt/image/upload/f_auto,q_auto,w_500,h_400,c_fill/v1780460251/Strawberry-Lemonade_jomlxy.png",
+      "badge": "Bestseller",
+      "veg": true
+    },
+    {
+      "id": 17,
+      "category": "Drinks",
+      "name": "Iced Mocha Shake",
+      "desc": "A rich blend of espresso, chocolate, cold milk, and whipped cream.",
+      "price": 119,
+      "rating": 4.7,
+      "time": "5-10 min",
+      "img": "https://res.cloudinary.com/dyoht5hxt/image/upload/f_auto,q_auto,w_500,h_400,c_fill/v1780460240/Iced-Mocha-Shake_v6h6b3.png",
+      "badge": null,
+      "veg": true
+    },
+    {
+      "id": 18,
+      "category": "Drinks",
+      "name": "Virgin Mojito",
+      "desc": "A refreshing drink with fresh lime, mint leaves, soda, cane sugar, and crushed ice.",
+      "price": 79,
+      "rating": 4.8,
+      "time": "5 min",
+      "img": "https://res.cloudinary.com/dyoht5hxt/image/upload/f_auto,q_auto,w_500,h_400,c_fill/v1780460264/Virgin-Mojito_dsqwi2.png",
+      "badge": "Classic",
+      "veg": true
+    },
+    {
+      "id": 19,
+      "category": "Drinks",
+      "name": "Watermelon Cooler",
+      "desc": "A cooling drink with fresh watermelon juice, basil, a pinch of sea salt, and soda water.",
+      "price": 89,
+      "rating": 4.6,
+      "time": "5-10 min",
+      "img": "https://res.cloudinary.com/dyoht5hxt/image/upload/f_auto,q_auto,w_500,h_400,c_fill/v1780460257/Watermelon-Cooler_ynnyek.png",
+      "badge": null,
+      "veg": true
+    },
+    {
+      "id": 20,
+      "category": "Drinks",
+      "name": "Oreo Milkshake",
+      "desc": "A creamy milkshake made with crushed Oreo cookies, vanilla ice cream, cold milk, and chocolate drizzle.",
+      "price": 129,
+      "rating": 4.9,
+      "time": "5-10 min",
+      "img": "https://res.cloudinary.com/dyoht5hxt/image/upload/f_auto,q_auto,w_500,h_400,c_fill/v1780460239/Oreo-Milkshake_sjs7x1.png",
+      "badge": "Fan Fav",
+      "veg": true
+    }
+  ],
+  "RESTAURANTS": [
+    {
+      "id": 101,
+      "name": "Pizza Hut Express",
+      "image": "https://res.cloudinary.com/dyoht5hxt/image/upload/f_auto,q_auto,w_500,h_400,c_fill/v1780460244/Margherita-Royale_go5p4a.png",
+      "location": "Downtown Ahmedabad",
+      "rating": 4.8,
+      "deliveryTime": "25-35 min",
+      "deliveryFee": 30,
+      "cuisines": [
+        "Pizza",
+        "Italian",
+        "Continental"
+      ],
+      "isOpen": true,
+      "offers": "upto 30% off",
+      "description": "Premium pizza experience with authentic Italian flavors",
+      "acceptsOrders": true,
+      "minOrder": 200,
+      "menu": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "tags": [
+        "Pizza",
+        "Bestseller",
+        "Dine-in",
+        "Delivery"
+      ]
+    },
+    {
+      "id": 102,
+      "name": "Burger King",
+      "image": "https://res.cloudinary.com/dyoht5hxt/image/upload/f_auto,q_auto,w_500,h_400,c_fill/v1780460238/Classic-Smash-Burger_amwrwx.png",
+      "location": "CG Road, Ahmedabad",
+      "rating": 4.7,
+      "deliveryTime": "15-25 min",
+      "deliveryFee": 20,
+      "cuisines": [
+        "Burger",
+        "Fast Food",
+        "American"
+      ],
+      "isOpen": true,
+      "offers": "upto 50% off",
+      "description": "flame-grilled burgers with fresh ingredients",
+      "acceptsOrders": true,
+      "minOrder": 150,
+      "menu": [
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "tags": [
+        "Burgers",
+        "Fast Food",
+        "Takeaway"
+      ]
+    },
+    {
+      "id": 103,
+      "name": "Thirst Quenchers Cafe",
+      "image": "https://res.cloudinary.com/dyoht5hxt/image/upload/f_auto,q_auto,w_500,h_400,c_fill/v1780460244/Mango-Chiller_viabwr.png",
+      "location": "Satellite, Ahmedabad",
+      "rating": 4.6,
+      "deliveryTime": "10-15 min",
+      "deliveryFee": 15,
+      "cuisines": [
+        "Drinks",
+        "Cafe",
+        "Beverages"
+      ],
+      "isOpen": true,
+      "offers": "upto 25% off",
+      "description": "Refreshing beverages and cold drinks",
+      "acceptsOrders": true,
+      "minOrder": 100,
+      "menu": [
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ],
+      "tags": [
+        "Cafe",
+        "Drinks",
+        "Quick Service"
+      ]
+    },
+    {
+      "id": 104,
+      "name": "The Gourmet Kitchen",
+      "image": "https://res.cloudinary.com/dyoht5hxt/image/upload/f_auto,q_auto,w_500,h_400,c_fill/v1780460255/Truffle-Mushroom_i5d8w5.png",
+      "location": "Manek Chowk, Ahmedabad",
+      "rating": 4.9,
+      "deliveryTime": "30-40 min",
+      "deliveryFee": 50,
+      "cuisines": [
+        "Pizza",
+        "Burger",
+        "Premium Italian"
+      ],
+      "isOpen": true,
+      "offers": "upto 20% off",
+      "description": "Gourmet cuisine with premium ingredients",
+      "acceptsOrders": true,
+      "minOrder": 300,
+      "menu": [
+        1,
+        3,
+        4,
+        5,
+        7,
+        9
+      ],
+      "tags": [
+        "Premium",
+        "Italian",
+        "Gourmet"
+      ]
+    },
+    {
+      "id": 105,
+      "name": "Domino's Pizza",
+      "image": "https://res.cloudinary.com/dyoht5hxt/image/upload/f_auto,q_auto,w_500,h_400,c_fill/v1780460236/BBQ-Chicken-Blaze_e5vbji.png",
+      "location": "Vastrapur, Ahmedabad",
+      "rating": 4.3,
+      "deliveryTime": "20-30 min",
+      "deliveryFee": 25,
+      "cuisines": [
+        "Pizza",
+        "Pasta",
+        "Italian"
+      ],
+      "isOpen": true,
+      "offers": "upto 15% off",
+      "description": "Quality pizzas delivered fresh to your door",
+      "acceptsOrders": true,
+      "minOrder": 180,
+      "menu": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "tags": [
+        "Pizza",
+        "Italian",
+        "Delivery Champion"
+      ]
+    },
+    {
+      "id": 106,
+      "name": "La Pino'z Pizza",
+      "image": "https://res.cloudinary.com/dyoht5hxt/image/upload/f_auto,q_auto,w_500,h_400,c_fill/v1780460251/Pepperoni-Storm_aq73na.png",
+      "location": "Thaltej, Ahmedabad",
+      "rating": 4.4,
+      "deliveryTime": "22-32 min",
+      "deliveryFee": 28,
+      "cuisines": [
+        "Pizza",
+        "Pasta",
+        "Italian"
+      ],
+      "isOpen": true,
+      "offers": "upto 25% off",
+      "description": "Authentic Italian pizzas with fresh toppings",
+      "acceptsOrders": true,
+      "minOrder": 200,
+      "menu": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "tags": [
+        "Pizza",
+        "Italian",
+        "Quality Pizza"
+      ]
+    },
+    {
+      "id": 107,
+      "name": "McDonald's",
+      "image": "https://res.cloudinary.com/dyoht5hxt/image/upload/f_auto,q_auto,w_500,h_400,c_fill/v1780460236/Crispy-Chicken-Crunch_yom5yu.png",
+      "location": "SG Highway, Ahmedabad",
+      "rating": 4,
+      "deliveryTime": "15-20 min",
+      "deliveryFee": 18,
+      "cuisines": [
+        "Burger",
+        "Fast Food",
+        "American"
+      ],
+      "isOpen": true,
+      "offers": "upto 30% off",
+      "description": "World's favorite fast food",
+      "acceptsOrders": true,
+      "minOrder": 120,
+      "menu": [
+        7,
+        8,
+        10,
+        11,
+        12
+      ],
+      "tags": [
+        "Burgers",
+        "Fast Food",
+        "Quick Delivery"
+      ]
+    },
+    {
+      "id": 108,
+      "name": "US Pizza",
+      "image": "https://res.cloudinary.com/dyoht5hxt/image/upload/f_auto,q_auto,w_500,h_400,c_fill/v1780460244/Margherita-Royale_go5p4a.png",
+      "location": "Paldi, Ahmedabad",
+      "rating": 4.2,
+      "deliveryTime": "25-35 min",
+      "deliveryFee": 32,
+      "cuisines": [
+        "Pizza",
+        "Sandwich",
+        "Italian"
+      ],
+      "isOpen": true,
+      "offers": "upto 20% off",
+      "description": "American-style pizza with premium quality",
+      "acceptsOrders": true,
+      "minOrder": 200,
+      "menu": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "tags": [
+        "Pizza",
+        "American",
+        "Premium"
+      ]
+    },
+    {
+      "id": 109,
+      "name": "Pizza World",
+      "image": "https://res.cloudinary.com/dyoht5hxt/image/upload/f_auto,q_auto,w_500,h_400,c_fill/v1780460255/Veggie-Garden_kz42a4.png",
+      "location": "Nikol, Ahmedabad",
+      "rating": 3.9,
+      "deliveryTime": "20-28 min",
+      "deliveryFee": 22,
+      "cuisines": [
+        "Pizza",
+        "Burger",
+        "Fast Food"
+      ],
+      "isOpen": true,
+      "offers": "upto 15% off",
+      "description": "Variety of pizzas and burgers",
+      "acceptsOrders": true,
+      "minOrder": 150,
+      "menu": [
+        1,
+        2,
+        6,
+        7,
+        8,
+        10
+      ],
+      "tags": [
+        "Pizza",
+        "Burger",
+        "Budget-friendly"
+      ]
+    },
+    {
+      "id": 110,
+      "name": "Hungry Point",
+      "image": "https://res.cloudinary.com/dyoht5hxt/image/upload/f_auto,q_auto,w_500,h_400,c_fill/v1780460238/Classic-Smash-Burger_amwrwx.png",
+      "location": "Vesu, Ahmedabad",
+      "rating": 4.1,
+      "deliveryTime": "18-25 min",
+      "deliveryFee": 20,
+      "cuisines": [
+        "Burger",
+        "Pizza",
+        "Fast Food"
+      ],
+      "isOpen": true,
+      "offers": "upto 25% off",
+      "description": "Your hunger stops here - quality burgers",
+      "acceptsOrders": true,
+      "minOrder": 130,
+      "menu": [
+        7,
+        8,
+        9,
+        11,
+        12,
+        2
+      ],
+      "tags": [
+        "Burgers",
+        "Fast Food",
+        "Popular"
+      ]
+    },
+    {
+      "id": 111,
+      "name": "Food Express",
+      "image": "https://res.cloudinary.com/dyoht5hxt/image/upload/f_auto,q_auto,w_500,h_400,c_fill/v1780460236/BBQ-Chicken-Blaze_e5vbji.png",
+      "location": "Memnagar, Ahmedabad",
+      "rating": 3.8,
+      "deliveryTime": "15-22 min",
+      "deliveryFee": 19,
+      "cuisines": [
+        "Pizza",
+        "Burger",
+        "Continental"
+      ],
+      "isOpen": true,
+      "offers": "upto 15% off",
+      "description": "Fast, fresh food delivered to you",
+      "acceptsOrders": true,
+      "minOrder": 100,
+      "menu": [
+        1,
+        2,
+        7,
+        8,
+        10
+      ],
+      "tags": [
+        "Fast Food",
+        "Budget-friendly",
+        "Quick"
+      ]
+    },
+    {
+      "id": 112,
+      "name": "Street Bites",
+      "image": "https://res.cloudinary.com/dyoht5hxt/image/upload/f_auto,q_auto,w_500,h_400,c_fill/v1780460236/Crispy-Chicken-Crunch_yom5yu.png",
+      "location": "Gotri, Ahmedabad",
+      "rating": 4,
+      "deliveryTime": "12-18 min",
+      "deliveryFee": 15,
+      "cuisines": [
+        "Burger",
+        "Pizza",
+        "Snacks"
+      ],
+      "isOpen": true,
+      "offers": "upto 20% off",
+      "description": "Street food with quality ingredients",
+      "acceptsOrders": true,
+      "minOrder": 80,
+      "menu": [
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "tags": [
+        "Street Food",
+        "Budget",
+        "Quick Delivery"
+      ]
+    },
+    {
+      "id": 113,
+      "name": "Coffee Corner Cafe",
+      "image": "https://res.cloudinary.com/dyoht5hxt/image/upload/f_auto,q_auto,w_500,h_400,c_fill/v1780460240/Iced-Mocha-Shake_v6h6b3.png",
+      "location": "University Road, Ahmedabad",
+      "rating": 4.5,
+      "deliveryTime": "10-15 min",
+      "deliveryFee": 12,
+      "cuisines": [
+        "Cafe",
+        "Coffee",
+        "Beverages"
+      ],
+      "isOpen": true,
+      "offers": "upto 50% off",
+      "description": "Premium coffee and cafe experience",
+      "acceptsOrders": true,
+      "minOrder": 100,
+      "menu": [
+        13,
+        14,
+        17,
+        18
+      ],
+      "tags": [
+        "Cafe",
+        "Coffee",
+        "Premium"
+      ]
+    },
+    {
+      "id": 114,
+      "name": "Juice Master",
+      "image": "https://res.cloudinary.com/dyoht5hxt/image/upload/f_auto,q_auto,w_500,h_400,c_fill/v1780460251/Strawberry-Lemonade_jomlxy.png",
+      "location": "Ellisbridge, Ahmedabad",
+      "rating": 4.2,
+      "deliveryTime": "8-12 min",
+      "deliveryFee": 10,
+      "cuisines": [
+        "Juice",
+        "Smoothies",
+        "Beverages"
+      ],
+      "isOpen": true,
+      "offers": "upto 15% off",
+      "description": "Fresh, healthy juices and smoothies",
+      "acceptsOrders": true,
+      "minOrder": 80,
+      "menu": [
+        13,
+        15,
+        16,
+        19
+      ],
+      "tags": [
+        "Healthy",
+        "Juices",
+        "Quick"
+      ]
+    }
+  ],
+  "PROMO_CODES": [
+    {
+      "code": "WELCOME50",
+      "discount": 50,
+      "minOrder": 200,
+      "description": "50% off on first order",
+      "validTill": "Limited Time",
+      "badge": "🎉 First Order"
+    },
+    {
+      "code": "SAVE100",
+      "discount": 100,
+      "minOrder": 500,
+      "description": "Flat 100 off on orders above 500",
+      "validTill": "March 31, 2026",
+      "badge": "💰 Save Now"
+    },
+    {
+      "code": "FRIEND20",
+      "discount": 20,
+      "minOrder": 300,
+      "description": "20% off with friend referral",
+      "validTill": "Ongoing",
+      "badge": "👥 Share & Earn"
+    },
+    {
+      "code": "WEEKDAY30",
+      "discount": 30,
+      "minOrder": 400,
+      "description": "30% off on weekdays (Mon-Fri)",
+      "validTill": "Ongoing",
+      "badge": "📅 Weekdays"
+    },
+    {
+      "code": "COFFEE15",
+      "discount": 15,
+      "minOrder": 200,
+      "description": "15% off on cafe orders",
+      "validTill": "April 30, 2026",
+      "badge": "☕ Cafe Special"
+    },
+    {
+      "code": "PIZZA25",
+      "discount": 25,
+      "minOrder": 300,
+      "description": "25% off on pizza orders",
+      "validTill": "April 20, 2026",
+      "badge": "🍕 Pizza Mania"
+    }
+  ],
+  "DEALS": [
+    {
+      "id": 1,
+      "title": "Super Saver Pizza",
+      "discount": 40,
+      "description": "Upto 40% off",
+      "validTill": "Today 11:59 PM",
+      "restaurantId": 101,
+      "badge": "🔥 Hot Deal"
+    },
+    {
+      "id": 2,
+      "title": "Burger Bonanza",
+      "discount": 50,
+      "description": "Upto 50% off",
+      "validTill": "Tomorrow",
+      "restaurantId": 102,
+      "badge": "🍔 Limited Time"
+    },
+    {
+      "id": 3,
+      "title": "Refreshing Deals",
+      "discount": 35,
+      "description": "Upto 35% off",
+      "validTill": "Today 11:59 PM",
+      "restaurantId": 103,
+      "badge": "🥤 Summer Special"
+    },
+    {
+      "id": 4,
+      "title": "Gourmet Feast",
+      "discount": 20,
+      "description": "Upto 20% off",
+      "validTill": "Today",
+      "restaurantId": 104,
+      "badge": "✨ Premium"
+    },
+    {
+      "id": 5,
+      "title": "Double Delight",
+      "discount": 45,
+      "description": "Upto 45% off",
+      "validTill": "This Week",
+      "restaurantId": 105,
+      "badge": "💪 Best Combo"
+    }
+  ]
+}
