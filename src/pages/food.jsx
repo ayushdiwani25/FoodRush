@@ -19,7 +19,6 @@ export default function Food() {
   const [restaurants, setRestaurants] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // FE 07: Debounced search value
   const debouncedSearch = useDebounce(searchQuery, 250);
 
   if (location.state?.category !== prevCategoryState) {
@@ -27,7 +26,6 @@ export default function Food() {
     setSelectedCategory(location.state?.category || "All");
   }
 
-  // Load menu and restaurants from Firestore
   useEffect(() => {
     const fetchCatalogData = async () => {
       try {
@@ -50,7 +48,6 @@ export default function Food() {
 
   const categories = useMemo(() => ["All", ...new Set(menu.map((item) => item.category))], [menu]);
 
-  // FE 07: Memoized filtered menu
   const filteredMenu = useMemo(() => {
     return menu.filter((item) => {
       const matchesCategory = selectedCategory === "All" || item.category === selectedCategory;
@@ -59,7 +56,6 @@ export default function Food() {
     });
   }, [menu, selectedCategory, debouncedSearch]);
 
-  // Get restaurant for an item
   const getRestaurantForItem = (itemId) => {
     return restaurants.find((restaurant) => restaurant.menu?.includes(itemId));
   };
@@ -100,7 +96,6 @@ export default function Food() {
 
   return (
     <div className="min-h-screen bg-[#FCFBF7] text-neutral-800 flex flex-col font-sans py-12 px-4 md:px-8">
-      {/* Header */}
       <header className="text-center px-6 mb-12">
         <m.h1
           initial={{ opacity: 0, y: -20 }}
@@ -120,7 +115,6 @@ export default function Food() {
         </m.p>
       </header>
 
-      {/* Search Bar */}
       <section aria-label="Search Dishes" className="max-w-2xl mx-auto px-6 mb-10 w-full">
         <div className="relative">
           <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-neutral-400">
@@ -165,7 +159,6 @@ export default function Food() {
         )}
       </section>
 
-      {/* Category Filter */}
       <nav aria-label="Category Filters" className="flex flex-wrap justify-center gap-3 px-6 pb-12 w-full">
         {categories.map((category) => (
           <m.button
@@ -186,7 +179,6 @@ export default function Food() {
         ))}
       </nav>
 
-      {/* Menu Grid */}
       <section aria-label="Food Menu Items" className="container mx-auto px-4 pb-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {filteredMenu.map((item) => (
@@ -198,9 +190,7 @@ export default function Food() {
               whileHover={{ y: -6 }}
               className="relative"
             >
-              {/* Card Container */}
               <div className="bg-white rounded-2xl border border-neutral-100 overflow-hidden h-full flex flex-col hover:shadow-xl transition-all duration-500">
-                {/* Image Section */}
                 <div
                   className="relative bg-neutral-50 overflow-hidden h-40 cursor-pointer group"
                   onClick={() => handleImageClick(item.id)}
@@ -222,19 +212,15 @@ export default function Food() {
                   <div className="absolute inset-0 bg-neutral-950 opacity-0 group-hover:opacity-10 transition-opacity duration-300 pointer-events-none"></div>
                 </div>
 
-                {/* Content Section */}
                 <div className="flex-1 p-5 flex flex-col">
-                  {/* Category Badge */}
                   <span className="text-[10px] text-orange-600 uppercase tracking-wider font-extrabold mb-1">
                     {item.category}
                   </span>
 
-                  {/* Item Name */}
                   <h2 className="text-base font-extrabold text-neutral-900 mb-1.5 line-clamp-1 tracking-tight">
                     {item.name}
                   </h2>
 
-                  {/* Veg/NonVeg */}
                   <div className="mb-3">
                     {item.veg ? (
                       <span className="flex items-center gap-1.5 text-xs font-bold text-green-700 bg-green-50 border border-green-200/50 px-2 py-0.5 rounded-md w-fit">
@@ -249,14 +235,12 @@ export default function Food() {
                     )}
                   </div>
 
-                  {/* Rating */}
                   <div className="flex items-center gap-1 mb-4">
                     <span className="text-amber-400 text-xs" aria-hidden="true">★</span>
                     <span className="text-xs font-bold text-neutral-700">{item.rating || "4.5"}</span>
                     <span className="text-xs text-neutral-400 font-medium">({item.reviews || "120+"})</span>
                   </div>
 
-                  {/* Footer - Price & Add Button */}
                   <div className="mt-auto pt-3 border-t border-neutral-100 flex items-center justify-between">
                     <div>
                       <span className="text-xs text-neutral-400 block font-medium">Price</span>

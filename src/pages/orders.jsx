@@ -27,13 +27,11 @@ export default function OrdersPage() {
   const [ordersLoading, setOrdersLoading] = useState(false);
   const [now, setNow] = useState(0);
 
-  // Write Review Modal state
   const [reviewOrder, setReviewOrder] = useState(null);
   const [reviewRating, setReviewRating] = useState(5);
   const [reviewText, setReviewText] = useState("");
   const [isSubmittingReview, setIsSubmittingReview] = useState(false);
 
-  // Set up ticker to update active order timers in real-time and simulate status progression
   useEffect(() => {
     Promise.resolve().then(() => {
       setNow(Date.now());
@@ -43,7 +41,6 @@ export default function OrdersPage() {
       const currentTime = Date.now();
       setNow(currentTime);
 
-      // Simulate status progression for active orders in real-time
       orders.forEach(async (order) => {
         if (order.isActive && order.status !== "Cancelled" && order.status !== "Delivered") {
           const placed = order.placedAt || (order.createdAt ? new Date(order.createdAt).getTime() : currentTime);
@@ -166,7 +163,6 @@ export default function OrdersPage() {
     }
   };
 
-  // Fetch orders from Firestore on mount and expire stale ones
   useEffect(() => {
     dispatch(expireActiveOrders());
 
@@ -177,7 +173,6 @@ export default function OrdersPage() {
     });
     const userId = user.uid || user.id;
 
-    // Set up real-time subscription
     const ordersRef = collection(db, "orders");
     const q = query(ordersRef, where("userId", "==", userId));
 
@@ -187,7 +182,6 @@ export default function OrdersPage() {
         ...doc.data()
       }));
 
-      // Sort by placedAt descending in memory
       fetchedOrders.sort((a, b) => (b.placedAt || 0) - (a.placedAt || 0));
 
       dispatch(loadOrders(fetchedOrders));
@@ -276,12 +270,9 @@ export default function OrdersPage() {
     }
   };
 
-
-
   return (
     <div className="min-h-screen bg-gray-50 py-8 px-4 md:px-8">
       <div className="max-w-4xl mx-auto">
-        {/* Header */}
         <m.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -291,7 +282,6 @@ export default function OrdersPage() {
           <p className="text-gray-600 mt-2">Track and manage your all orders</p>
         </m.div>
 
-        {/* Tabs */}
         <div className="flex gap-4 mb-8 border-b-2 border-gray-300">
           <button
             type="button"
@@ -325,7 +315,6 @@ export default function OrdersPage() {
           </button>
         </div>
 
-        {/* Orders List */}
         <div className="space-y-4">
           {ordersLoading ? (
             <div className="flex justify-center py-12">
@@ -408,15 +397,12 @@ export default function OrdersPage() {
                     </div>
                   </div>
 
-                  {/* Visual Delivery Progress Timeline */}
                   {order.status !== "Cancelled" && (
                     <div className="mb-6 mt-4 p-4 bg-gray-50/50 rounded-xl border border-gray-100">
                       <p className="text-[10px] font-bold text-neutral-400 uppercase tracking-wider mb-4">Delivery Progress</p>
                       <div className="relative flex items-center justify-between w-full px-2">
-                        {/* Background Line */}
                         <div className="absolute left-0 right-0 top-4 -translate-y-1/2 h-1 bg-gray-200 z-0 mx-4"></div>
                         
-                        {/* Active Progress Line */}
                         <div 
                           className="absolute left-0 top-4 -translate-y-1/2 h-1 bg-orange-500 transition-all duration-500 z-0 mx-4"
                           style={{
@@ -429,7 +415,6 @@ export default function OrdersPage() {
                           }}
                         ></div>
 
-                        {/* Step 1: Placed */}
                         <div className="flex flex-col items-center z-10">
                           <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-300 ${
                             getStatusStepIndex(order.status) >= 1 ? "bg-orange-500 text-white shadow-md scale-110" : "bg-gray-200 text-gray-400"
@@ -439,7 +424,6 @@ export default function OrdersPage() {
                           <span className={`text-[10px] font-bold mt-1.5 ${getStatusStepIndex(order.status) >= 1 ? "text-orange-600" : "text-gray-400"}`}>Placed</span>
                         </div>
 
-                        {/* Step 2: Confirmed */}
                         <div className="flex flex-col items-center z-10">
                           <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-300 ${
                             getStatusStepIndex(order.status) >= 2 ? "bg-orange-500 text-white shadow-md scale-110" : "bg-gray-200 text-gray-400"
@@ -449,7 +433,6 @@ export default function OrdersPage() {
                           <span className={`text-[10px] font-bold mt-1.5 ${getStatusStepIndex(order.status) >= 2 ? "text-orange-600" : "text-gray-400"}`}>Preparing</span>
                         </div>
 
-                        {/* Step 3: Out for Delivery */}
                         <div className="flex flex-col items-center z-10">
                           <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-300 ${
                             getStatusStepIndex(order.status) >= 3 ? "bg-orange-500 text-white shadow-md scale-110" : "bg-gray-200 text-gray-400"
@@ -459,7 +442,6 @@ export default function OrdersPage() {
                           <span className={`text-[10px] font-bold mt-1.5 ${getStatusStepIndex(order.status) >= 3 ? "text-orange-600" : "text-gray-400"}`}>On the Way</span>
                         </div>
 
-                        {/* Step 4: Delivered */}
                         <div className="flex flex-col items-center z-10">
                           <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-300 ${
                             getStatusStepIndex(order.status) >= 4 ? "bg-green-500 text-white shadow-md scale-110" : "bg-gray-200 text-gray-400"
@@ -472,7 +454,6 @@ export default function OrdersPage() {
                     </div>
                   )}
 
-                  {/* Delivery Driver Info Card */}
                   {(order.status === "Out for Delivery" || order.status === "Delivered") && (
                     <div className="mb-6 p-4 bg-gray-50 border border-gray-150 rounded-xl flex flex-wrap items-center justify-between gap-4">
                       <div className="flex items-center gap-3">
@@ -562,7 +543,6 @@ export default function OrdersPage() {
           )}
         </div>
 
-        {/* Order Details Modal */}
         {selectedOrder && (
           <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
             <m.div
@@ -658,7 +638,6 @@ export default function OrdersPage() {
           </div>
         )}
 
-        {/* Write Review Modal */}
         {reviewOrder && (
           <div className="fixed inset-0 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 z-50">
             <m.div
@@ -683,7 +662,6 @@ export default function OrdersPage() {
                 </p>
 
                 <form onSubmit={handleSubmitReview}>
-                  {/* Stars */}
                   <div className="flex justify-center gap-2 mb-6">
                     {[1, 2, 3, 4, 5].map((star) => (
                       <button
@@ -699,7 +677,6 @@ export default function OrdersPage() {
                     ))}
                   </div>
 
-                  {/* Review Text */}
                   <div className="mb-6">
                     <label className="block text-gray-700 font-semibold mb-2 text-sm">
                       Your Review

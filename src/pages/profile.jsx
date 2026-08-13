@@ -8,7 +8,6 @@ import { auth, db } from "../firebase";
 import { signOut } from "firebase/auth";
 import { doc, updateDoc } from "firebase/firestore";
 
-// ===== HELPER: Tab Button =====
 function TabButton({ active, label, onClick }) {
   return (
     <button
@@ -25,7 +24,6 @@ function TabButton({ active, label, onClick }) {
   );
 }
 
-// ===== HELPER: Profile Info Card =====
 function InfoCard({ icon, label, value }) {
   return (
     <m.div
@@ -38,7 +36,6 @@ function InfoCard({ icon, label, value }) {
   );
 }
 
-// ===== MAIN COMPONENT =====
 export default function ProfilePage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -49,7 +46,6 @@ export default function ProfilePage() {
   const [saveLoading, setSaveLoading] = useState(false);
   const [saveError, setSaveError] = useState("");
 
-  // If not logged in, show login prompt
   if (!isLoggedIn || !user) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
@@ -109,20 +105,17 @@ export default function ProfilePage() {
     <div className="min-h-screen bg-gray-50 py-8 px-4 md:px-8">
       <div className="max-w-4xl mx-auto">
 
-        {/* Header */}
         <m.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
           <h1 className="text-4xl font-bold text-gray-800">My Profile</h1>
           <p className="text-gray-600 mt-2">Manage your account and preferences</p>
         </m.div>
 
-        {/* Tab Navigation */}
         <div className="flex gap-4 mb-8 border-b-2 border-gray-300">
           <TabButton active={activeTab === "profile"} label="Profile" onClick={() => setActiveTab("profile")} />
           <TabButton active={activeTab === "addresses"} label="Addresses" onClick={() => setActiveTab("addresses")} />
           <TabButton active={activeTab === "settings"} label="Settings" onClick={() => setActiveTab("settings")} />
         </div>
 
-        {/* PROFILE TAB */}
         {activeTab === "profile" && (
           <m.div
             initial={{ opacity: 0 }}
@@ -131,7 +124,6 @@ export default function ProfilePage() {
           >
             {!isEditing ? (
               <div>
-                {/* User Header */}
                 <div className="flex items-center gap-6 mb-8 pb-8 border-b-2 border-orange-300">
                   <m.div
                     whileHover={{ scale: 1.1 }}
@@ -146,7 +138,6 @@ export default function ProfilePage() {
                   </div>
                 </div>
 
-                {/* Info Cards */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
                   <InfoCard icon="📱" label="Phone" value={user?.phone} />
                   <InfoCard icon="📅" label="Member Since" value={user?.memberSince} />
@@ -228,19 +219,16 @@ export default function ProfilePage() {
           </m.div>
         )}
 
-        {/* ADDRESSES TAB */}
         {activeTab === "addresses" && (
           <m.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
             <AddressManagement />
           </m.div>
         )}
 
-        {/* SETTINGS TAB */}
         {activeTab === "settings" && (
           <m.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="bg-white rounded-2xl p-8 shadow-md border-2 border-gray-200">
             <h3 className="text-2xl font-bold text-gray-800 mb-8">⚙️ Settings</h3>
 
-            {/* Account Info */}
             <div className="mb-10 bg-gray-50 p-6 rounded-lg border-2 border-gray-300">
               <h4 className="text-lg font-bold text-gray-800 mb-4">ℹ️ Account Information</h4>
               <p className="text-gray-700"><strong>Email:</strong> {user?.email}</p>
@@ -248,7 +236,6 @@ export default function ProfilePage() {
               <p className="text-gray-700"><strong>Member Since:</strong> {user?.memberSince}</p>
             </div>
 
-            {/* Logout */}
             <m.button
               type="button"
               whileHover={{ scale: 1.02 }}

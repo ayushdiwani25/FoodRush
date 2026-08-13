@@ -6,7 +6,6 @@ import store from "./redux"
 import { Provider } from "react-redux";
 import { initPerformanceMonitoring } from "./lib/performance";
 
-// FE 07: Initialize Core Web Vitals performance observer
 initPerformanceMonitoring();
 
 createRoot(document.getElementById('root')).render(

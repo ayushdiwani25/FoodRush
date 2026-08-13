@@ -19,7 +19,6 @@ export default function LoginPage() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // Redirect if already logged in
   useEffect(() => {
     if (isLoggedIn) {
       navigate("/profile");
@@ -34,7 +33,6 @@ export default function LoginPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validate form structures locally first
     const validation = validateLogin(form);
     if (!validation.valid) {
       setError(validation.error);
@@ -48,12 +46,10 @@ export default function LoginPage() {
       const userCredential = await signInWithEmailAndPassword(auth, form.email, form.password);
       const firebaseUser = userCredential.user;
 
-      // Fetch user profile info from Firestore
       const userDocRef = doc(db, "users", firebaseUser.uid);
       const userDoc = await getDoc(userDocRef);
       const profileData = userDoc.exists() ? userDoc.data() : {};
 
-      // Construct user object for your Redux store
       const userData = {
         uid: firebaseUser.uid,
         email: firebaseUser.email,
@@ -102,13 +98,10 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#FFF8F6] p-4 relative overflow-hidden font-sans">
-      {/* Soft warm orange glowing accents (Mesh effect on light theme) */}
       <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-orange-100/50 blur-3xl" />
       <div className="absolute bottom-[-10%] right-[-10%] w-[60%] h-[60%] rounded-full bg-orange-200/40 blur-3xl" />
 
-      {/* Premium Floating Vector Food SVGs */}
       <div className="absolute inset-0 pointer-events-none select-none">
-        {/* Pizza */}
         <m.div 
           className="absolute text-orange-500/12 top-[15%] left-[10%]"
           animate={{ y: [0, -15, 0], rotate: [0, 8, -8, 0] }}
@@ -119,7 +112,6 @@ export default function LoginPage() {
           </svg>
         </m.div>
 
-        {/* Burger */}
         <m.div 
           className="absolute text-orange-500/12 top-[65%] left-[8%]"
           animate={{ y: [0, 15, 0], rotate: [0, -10, 10, 0] }}
@@ -130,7 +122,6 @@ export default function LoginPage() {
           </svg>
         </m.div>
 
-        {/* Drink */}
         <m.div 
           className="absolute text-orange-500/12 top-[20%] right-[12%]"
           animate={{ y: [0, -12, 0], rotate: [0, -6, 6, 0] }}
@@ -141,7 +132,6 @@ export default function LoginPage() {
           </svg>
         </m.div>
 
-        {/* Taco / Ice Cream */}
         <m.div 
           className="absolute text-orange-500/12 top-[70%] right-[10%]"
           animate={{ y: [0, 18, 0], rotate: [0, 12, -12, 0] }}

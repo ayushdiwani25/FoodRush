@@ -39,7 +39,6 @@ const orderSlice = createSlice({
       state.activeOrder = newOrder;
     },
 
-    // Load orders fetched from Firestore
     loadOrders: (state, action) => {
       state.orders = action.payload;
     },

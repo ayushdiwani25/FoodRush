@@ -26,7 +26,6 @@ export default function RestaurantDetailsPage() {
     const fetchRestaurantData = async () => {
       try {
         setLoading(true);
-        // Fetch restaurant profile
         const docRef = doc(db, "restaurants", restaurantId);
         const docSnap = await getDoc(docRef);
 
@@ -34,7 +33,6 @@ export default function RestaurantDetailsPage() {
           const restData = docSnap.data();
           setRestaurant(restData);
 
-          // Fetch all menu items and filter
           const menuSnapshot = await getDocs(collection(db, "menus"));
           const allMenus = menuSnapshot.docs.map(d => d.data());
           const matchedMenu = allMenus.filter(item => restData.menu.includes(item.id));
@@ -85,7 +83,6 @@ export default function RestaurantDetailsPage() {
 
     const existingItem = cartItems.find((i) => i.id === item.id);
 
-    // Only allow adding once per click session, prevent spamming
     if (!addedItems[item.id]) {
       if (existingItem) {
         dispatch(addToCart({ ...item, restaurantName: restaurant.name, restaurantId: restaurant.id, qty: existingItem.qty + 1 }));
@@ -93,7 +90,6 @@ export default function RestaurantDetailsPage() {
         dispatch(addToCart({ ...item, restaurantName: restaurant.name, restaurantId: restaurant.id, qty: 1 }));
       }
 
-      // Show animation feedback & lock button temporarily
       setAddedItems(prev => ({ ...prev, [item.id]: true }));
       setTimeout(() => {
         setAddedItems(prev => ({ ...prev, [item.id]: false }));
@@ -106,7 +102,6 @@ export default function RestaurantDetailsPage() {
       dispatch(clearCart());
       dispatch(addToCart({ ...pendingItem, restaurantName: restaurant.name, restaurantId: restaurant.id, qty: 1 }));
 
-      // Show animation feedback
       setAddedItems(prev => ({ ...prev, [pendingItem.id]: true }));
       setTimeout(() => {
         setAddedItems(prev => ({ ...prev, [pendingItem.id]: false }));
@@ -118,7 +113,6 @@ export default function RestaurantDetailsPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Restaurant Header */}
       <div className="relative h-64 md:h-96 overflow-hidden bg-gray-200">
         <img
           src={restaurant.image}
@@ -127,7 +121,6 @@ export default function RestaurantDetailsPage() {
         />
         <div className="absolute inset-0 bg-black/30"></div>
 
-        {/* Back Button */}
         <button
           type="button"
           onClick={() => navigate("/restaurants")}
@@ -137,7 +130,6 @@ export default function RestaurantDetailsPage() {
         </button>
       </div>
 
-      {/* Restaurant Info */}
       <div className="max-w-6xl mx-auto px-4 -mt-20 mb-8 relative z-10">
         <div className="bg-white rounded-2xl shadow-lg p-6 md:p-8">
           <div className="flex justify-between items-start flex-wrap gap-4">
@@ -202,11 +194,8 @@ export default function RestaurantDetailsPage() {
         </div>
       </div>
 
-      {/* Menu Section */}
       <div className="max-w-6xl mx-auto px-4 mb-8">
-        {/* Sticky Filters Wrapper */}
         <div className="sticky top-0 z-20 bg-gray-50/95 backdrop-blur-xs py-4 border-b border-gray-200 mb-8">
-          {/* Category Filter */}
           <div className="mb-4 overflow-x-auto">
             <div className="flex gap-3 pb-2">
               {uniqueCategories.map(category => (
@@ -225,7 +214,6 @@ export default function RestaurantDetailsPage() {
             </div>
           </div>
 
-          {/* Veg/Non-Veg Sub-Filters */}
           <div className="flex flex-wrap items-center gap-3">
             <button
               type="button"
@@ -268,7 +256,6 @@ export default function RestaurantDetailsPage() {
           </div>
         </div>
 
-        {/* Menu Items Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredMenu.map((item, index) => (
             <m.div
@@ -334,7 +321,6 @@ export default function RestaurantDetailsPage() {
         </div>
       </div>
 
-      {/* Replace Cart Modal */}
       {showReplaceModal && pendingItem && (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 z-50">
           <m.div

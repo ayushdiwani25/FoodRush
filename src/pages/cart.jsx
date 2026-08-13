@@ -10,7 +10,6 @@ export default function Cart() {
   return (
     <div className="min-h-screen bg-linear-to-br from-orange-50/50 to-yellow-50/50 py-8 px-4 md:px-8 font-sans">
       <div className="max-w-6xl mx-auto">
-        {/* Title */}
         <h1 className="text-3xl md:text-4xl font-extrabold text-center text-neutral-900 mb-8 tracking-tight">
           🛒 Your Shopping Cart
         </h1>
@@ -30,14 +29,12 @@ export default function Cart() {
           </div>
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
-            {/* LEFT: Cart Items List */}
             <main className="lg:col-span-2 space-y-4">
               {cartItems.map((item) => (
                 <article
                   key={item.id}
                   className="flex flex-col sm:flex-row items-center gap-4 bg-white p-4 md:p-5 rounded-2xl border border-neutral-100 shadow-xs hover:shadow-md transition"
                 >
-                  {/* FE 07: Optimized Image component */}
                   <div className="w-full sm:w-28 h-28 shrink-0 rounded-xl overflow-hidden">
                     <OptimizedImage
                       src={item.img}
@@ -47,7 +44,6 @@ export default function Cart() {
                     />
                   </div>
 
-                  {/* Details */}
                   <div className="flex-1 w-full">
                     <div className="flex justify-between items-start">
                       <div>
@@ -75,7 +71,6 @@ export default function Cart() {
                       )}
                     </div>
 
-                    {/* Quantity & Delete Controls */}
                     <div className="flex items-center justify-between mt-4 pt-3 border-t border-neutral-50">
                       <div className="flex items-center gap-2">
                         <button
@@ -118,7 +113,6 @@ export default function Cart() {
               ))}
             </main>
 
-            {/* RIGHT: Order Summary Box */}
             <aside className="bg-white p-6 rounded-3xl border border-neutral-100 shadow-lg sticky top-24">
               <h2 className="text-lg font-black text-neutral-900 mb-4 border-b border-neutral-100 pb-3">Order Summary</h2>
 

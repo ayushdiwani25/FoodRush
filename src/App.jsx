@@ -9,7 +9,6 @@ import { auth, db } from "./firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 
-// Lazy-load page components for chunk optimization
 const Home = lazy(() => import("./pages/home"));
 const Food = lazy(() => import("./pages/food"));
 const Cart = lazy(() => import("./pages/cart"));
@@ -23,14 +22,12 @@ const RestaurantAdminPanel = lazy(() => import("./pages/admin-panel"));
 const LoginPage = lazy(() => import("./pages/login"));
 const SignupPage = lazy(() => import("./pages/signup"));
 
-// Loading spinner fallback for lazy components
 const PageFallback = () => (
   <div className="min-h-screen flex items-center justify-center bg-orange-50/50">
     <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-orange-500"></div>
   </div>
 );
 
-// Page transition wrapper component
 const PageTransition = ({ children }) => (
   <m.div
     initial={{ opacity: 0, y: 20 }}
@@ -52,7 +49,6 @@ export default function App() {
     const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
       try {
         if (firebaseUser) {
-          // Fetch custom profile data (like isAdmin, addresses, favorites) from Firestore
           const userDocRef = doc(db, "users", firebaseUser.uid);
           const userDoc = await getDoc(userDocRef);
           

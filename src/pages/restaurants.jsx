@@ -14,7 +14,6 @@ export default function RestaurantsPage() {
   const [menus, setMenus] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Filters and sorting states
   const [vegFilter, setVegFilter] = useState("all"); // "all", "veg", "nonveg"
   const [ratingFilter, setRatingFilter] = useState(false); // true/false for 4.0+
   const [sortBy, setSortBy] = useState("default"); // "default", "time", "cost", "rating"
@@ -58,7 +57,6 @@ export default function RestaurantsPage() {
     return match ? parseInt(match[1], 10) : 999;
   };
 
-  // FE 07: Memoize filtered and sorted restaurant results
   const filteredAndSortedRestaurants = useMemo(() => {
     return restaurants
       .filter((restaurant) => {
@@ -71,7 +69,6 @@ export default function RestaurantsPage() {
 
         if (!matchesSearch) return false;
 
-        // Apply Veg Filter
         if (vegFilter === "veg") {
           const vegStatus = getRestaurantVegStatus(restaurant);
           if (vegStatus !== "veg") return false;
@@ -81,7 +78,6 @@ export default function RestaurantsPage() {
           if (vegStatus === "veg") return false;
         }
 
-        // Apply Rating 4.0+ filter
         if (ratingFilter) {
           if ((restaurant.rating || 0) < 4.0) return false;
         }
@@ -121,7 +117,6 @@ export default function RestaurantsPage() {
   return (
     <div className="min-h-screen bg-[#FCFBF7] py-12 px-4 md:px-8 font-sans">
       <div className="max-w-7xl mx-auto">
-        {/* Header */}
         <header className="mb-10 text-left">
           <m.h1
             initial={{ opacity: 0, y: -20 }}
@@ -139,23 +134,19 @@ export default function RestaurantsPage() {
           </m.p>
         </header>
 
-        {/* Search */}
         <div className="mb-8">
           <SearchComponent onSearch={handleSearch} />
         </div>
 
-        {/* Filters and Sorting Bar */}
         <nav aria-label="Restaurant Filters" className="flex flex-wrap items-center gap-3 mb-10 pb-4 border-b border-neutral-100">
-          {/* Veg Filter Toggle */}
           <button
             type="button"
             aria-pressed={vegFilter === "veg"}
             onClick={() => setVegFilter((prev) => (prev === "veg" ? "all" : "veg"))}
-            className={`px-4 py-2 rounded-full text-xs font-bold transition-all duration-200 border flex items-center gap-1.5 cursor-pointer min-h-[40px] focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:outline-none ${
-              vegFilter === "veg"
+            className={`px-4 py-2 rounded-full text-xs font-bold transition-all duration-200 border flex items-center gap-1.5 cursor-pointer min-h-[40px] focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:outline-none ${vegFilter === "veg"
                 ? "bg-green-50 text-green-700 border-green-300 shadow-2xs ring-2 ring-green-100"
                 : "bg-white text-neutral-600 border-neutral-200 hover:bg-neutral-50"
-            }`}
+              }`}
           >
             <span className="w-3.5 h-3.5 border border-green-600 rounded-xs flex items-center justify-center bg-white shrink-0" aria-hidden="true">
               <span className="w-1.5 h-1.5 bg-green-600 rounded-full"></span>
@@ -163,16 +154,14 @@ export default function RestaurantsPage() {
             <span>Pure Veg</span>
           </button>
 
-          {/* Non-Veg Filter Toggle */}
           <button
             type="button"
             aria-pressed={vegFilter === "nonveg"}
             onClick={() => setVegFilter((prev) => (prev === "nonveg" ? "all" : "nonveg"))}
-            className={`px-4 py-2 rounded-full text-xs font-bold transition-all duration-200 border flex items-center gap-1.5 cursor-pointer min-h-[40px] focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:outline-none ${
-              vegFilter === "nonveg"
+            className={`px-4 py-2 rounded-full text-xs font-bold transition-all duration-200 border flex items-center gap-1.5 cursor-pointer min-h-[40px] focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:outline-none ${vegFilter === "nonveg"
                 ? "bg-red-50 text-red-700 border-red-300 shadow-2xs ring-2 ring-red-100"
                 : "bg-white text-neutral-600 border-neutral-200 hover:bg-neutral-50"
-            }`}
+              }`}
           >
             <span className="w-3.5 h-3.5 border border-red-600 rounded-xs flex items-center justify-center bg-white shrink-0" aria-hidden="true">
               <span className="w-0 h-0 border-l-[3px] border-l-transparent border-r-[3px] border-r-transparent border-b-[6px] border-b-red-600"></span>
@@ -180,72 +169,61 @@ export default function RestaurantsPage() {
             <span>Non-Veg</span>
           </button>
 
-          {/* Rating 4.0+ Filter Toggle */}
           <button
             type="button"
             aria-pressed={ratingFilter}
             onClick={() => setRatingFilter((prev) => !prev)}
-            className={`px-4 py-2 rounded-full text-xs font-bold transition-all duration-200 border flex items-center gap-1.5 cursor-pointer min-h-[40px] focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:outline-none ${
-              ratingFilter
+            className={`px-4 py-2 rounded-full text-xs font-bold transition-all duration-200 border flex items-center gap-1.5 cursor-pointer min-h-[40px] focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:outline-none ${ratingFilter
                 ? "bg-orange-50 text-orange-700 border-orange-200 shadow-2xs"
                 : "bg-white text-neutral-600 border-neutral-200 hover:bg-neutral-50"
-            }`}
+              }`}
           >
             ⭐ Rating 4.0+
           </button>
 
-          {/* Divider */}
           <span className="h-6 w-[1px] bg-neutral-200 mx-1 hidden sm:inline-block" aria-hidden="true"></span>
 
-          {/* Sort Options */}
           <div className="flex items-center gap-2 flex-wrap">
             <span className="text-xs font-bold text-neutral-400 uppercase tracking-wider mr-1 hidden sm:inline-block">Sort by:</span>
 
-            {/* Default/Relevance */}
             <button
               type="button"
               onClick={() => setSortBy("default")}
               aria-pressed={sortBy === "default"}
-              className={`px-3 py-1.5 rounded-lg text-xs font-bold transition border cursor-pointer min-h-[36px] focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:outline-none ${
-                sortBy === "default"
+              className={`px-3 py-1.5 rounded-lg text-xs font-bold transition border cursor-pointer min-h-[36px] focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:outline-none ${sortBy === "default"
                   ? "bg-neutral-900 text-white border-neutral-900"
                   : "bg-white text-neutral-600 border-neutral-200 hover:bg-neutral-50"
-              }`}
+                }`}
             >
               Relevance
             </button>
 
-            {/* Rating */}
             <button
               type="button"
               onClick={() => setSortBy("rating")}
               aria-pressed={sortBy === "rating"}
-              className={`px-3 py-1.5 rounded-lg text-xs font-bold transition border cursor-pointer min-h-[36px] focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:outline-none ${
-                sortBy === "rating"
+              className={`px-3 py-1.5 rounded-lg text-xs font-bold transition border cursor-pointer min-h-[36px] focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:outline-none ${sortBy === "rating"
                   ? "bg-neutral-900 text-white border-neutral-900"
                   : "bg-white text-neutral-600 border-neutral-200 hover:bg-neutral-50"
-              }`}
+                }`}
             >
               Rating
             </button>
 
-            {/* Delivery Time */}
             <button
               type="button"
               onClick={() => setSortBy("time")}
               aria-pressed={sortBy === "time"}
-              className={`px-3 py-1.5 rounded-lg text-xs font-bold transition border cursor-pointer min-h-[36px] focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:outline-none ${
-                sortBy === "time"
+              className={`px-3 py-1.5 rounded-lg text-xs font-bold transition border cursor-pointer min-h-[36px] focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:outline-none ${sortBy === "time"
                   ? "bg-neutral-900 text-white border-neutral-900"
                   : "bg-white text-neutral-600 border-neutral-200 hover:bg-neutral-50"
-              }`}
+                }`}
             >
               Delivery Time
             </button>
           </div>
         </nav>
 
-        {/* Restaurant Cards Grid */}
         <main>
           {filteredAndSortedRestaurants.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -267,7 +245,6 @@ export default function RestaurantsPage() {
                   }}
                   className="bg-white rounded-2xl border border-neutral-100 overflow-hidden shadow-xs hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col focus-visible:ring-4 focus-visible:ring-orange-500 focus-visible:outline-none"
                 >
-                  {/* Restaurant Banner Image */}
                   <div className="relative h-48 overflow-hidden bg-neutral-100">
                     <OptimizedImage
                       src={restaurant.image}
@@ -280,7 +257,6 @@ export default function RestaurantsPage() {
                     </div>
                   </div>
 
-                  {/* Details Section */}
                   <div className="p-6 flex-1 flex flex-col justify-between">
                     <div>
                       <h2 className="text-xl font-black text-neutral-900 mb-1">{restaurant.name}</h2>

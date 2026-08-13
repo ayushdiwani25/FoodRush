@@ -60,7 +60,6 @@ export default function Checkout() {
 
   const deliveryCharge = totalPrice > 500 ? 0 : 50;
   
-  // Calculate discount
   let discountAmount = 0;
   if (appliedPromo) {
     discountAmount = appliedPromo.discount;
@@ -75,7 +74,6 @@ export default function Checkout() {
       [name]: value,
     };
     setFormData(updatedData);
-    // Save to localStorage on every change
     localStorage.setItem("checkout", JSON.stringify(updatedData));
   };
 
@@ -130,7 +128,6 @@ export default function Checkout() {
     
     if (!validateForm()) return;
 
-    // Server-side database price verification to prevent price tampering
     let verifiedSubtotal = totalPrice;
     try {
       const menuSnap = await getDocs(collection(db, "menus"));
@@ -152,7 +149,6 @@ export default function Checkout() {
 
     const verifiedTotal = Math.max(0, verifiedSubtotal + deliveryCharge - discountAmount);
 
-    // Create order data
     const orderData = {
       items: cartItems,
       total: verifiedTotal,
@@ -178,10 +174,8 @@ export default function Checkout() {
       placedAt: Date.now(),
     };
 
-    // 1. Dispatch order to Redux store
     dispatch(placeOrder(newOrder));
 
-    // 2. Persist order to Cloud Firestore
     try {
       await addDoc(collection(db, "orders"), newOrder);
     } catch (err) {
@@ -191,7 +185,6 @@ export default function Checkout() {
     setOrderPlaced(true);
     dispatch(clearCart());
 
-    // Redirect to orders page after 2 seconds
     setTimeout(() => {
       navigate("/orders");
     }, 2000);
@@ -246,7 +239,6 @@ export default function Checkout() {
         </h1>
 
         <div className="grid md:grid-cols-3 gap-8">
-          {/* LEFT: Delivery Form */}
           <div className="md:col-span-2">
             <div className="bg-white p-8 rounded-2xl shadow-lg">
               <h2 className="text-2xl font-bold text-gray-800 mb-6">
@@ -254,7 +246,6 @@ export default function Checkout() {
               </h2>
 
               <div className="space-y-4">
-                {/* Full Name */}
                 <div>
                   <label className="block text-gray-700 font-semibold mb-2">
                     Full Name *
@@ -269,7 +260,6 @@ export default function Checkout() {
                   />
                 </div>
 
-                {/* Phone */}
                 <div>
                   <label className="block text-gray-700 font-semibold mb-2">
                     Phone Number *
@@ -284,7 +274,6 @@ export default function Checkout() {
                   />
                 </div>
 
-                {/* Address */}
                 <div>
                   <label className="block text-gray-700 font-semibold mb-2">
                     Address *
@@ -299,7 +288,6 @@ export default function Checkout() {
                   />
                 </div>
 
-                {/* City & Postal Code */}
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label className="block text-gray-700 font-semibold mb-2">
@@ -329,7 +317,6 @@ export default function Checkout() {
                   </div>
                 </div>
 
-                {/* Payment Method */}
                 <div className="mt-8">
                   <h3 className="text-xl font-bold text-gray-800 mb-4">
                     Payment Method
@@ -380,14 +367,12 @@ export default function Checkout() {
             </div>
           </div>
 
-          {/* RIGHT: Order Summary */}
           <div className="md:col-span-1">
             <div className="bg-white p-6 rounded-2xl shadow-lg h-fit sticky top-6">
               <h2 className="text-xl font-bold text-gray-800 mb-4">
                 Order Summary
               </h2>
 
-              {/* Items */}
               <div className="space-y-3 mb-4 max-h-64 overflow-y-auto">
                 {cartItems.map((item) => (
                   <div
@@ -407,10 +392,8 @@ export default function Checkout() {
                 ))}
               </div>
 
-              {/* Divider */}
               <hr className="my-4" />
 
-              {/* Promo Code Section */}
               <div className="mb-4 p-3 bg-blue-50 rounded-lg">
                 <h3 className="text-sm font-bold text-gray-800 mb-2">💰 Promo Code</h3>
                 {appliedPromo ? (
@@ -454,16 +437,13 @@ export default function Checkout() {
                 )}
               </div>
 
-              {/* Divider */}
               <hr className="my-4" />
 
-              {/* Subtotal */}
               <div className="flex justify-between text-gray-700 mb-2">
                 <span>Subtotal:</span>
                 <span>₹{totalPrice}</span>
               </div>
 
-              {/* Delivery Charge */}
               <div className="flex justify-between text-gray-700 mb-3">
                 <span>
                   Delivery:
@@ -482,7 +462,6 @@ export default function Checkout() {
                 </span>
               </div>
 
-              {/* Discount */}
               {discountAmount > 0 && (
                 <div className="flex justify-between text-green-600 font-semibold mb-3">
                   <span>Discount:</span>
@@ -490,16 +469,13 @@ export default function Checkout() {
                 </div>
               )}
 
-              {/* Divider */}
               <hr className="my-3" />
 
-              {/* Total */}
               <div className="flex justify-between text-xl font-bold text-orange-600 mb-6">
                 <span>Total:</span>
                 <span>₹{finalTotal}</span>
               </div>
 
-              {/* Place Order Button */}
               <button
                 type="button"
                 onClick={handlePlaceOrder}

@@ -1,17 +1,12 @@
 import { useState, useMemo } from "react";
 import { useDebounce } from "./useDebounce";
 
-/**
- * FE 05 & FE 07: Custom Hook - useRestaurants
- * Encapsulates search filtering, category sorting, and memoizes results.
- */
 export function useRestaurants(initialList = []) {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCuisine, setSelectedCuisine] = useState("All");
   const [minRating, setMinRating] = useState(0);
   const [sortBy, setSortBy] = useState("recommended");
 
-  // FE 07: Debounce search input to avoid recalculations per keystroke
   const debouncedSearch = useDebounce(searchTerm, 250);
 
   const filteredRestaurants = useMemo(() => {

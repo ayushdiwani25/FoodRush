@@ -6,10 +6,8 @@ export default function Footer() {
 
   return (
     <footer className="bg-[#100F0E] text-neutral-400 border-t border-neutral-900/60 font-sans">
-      {/* Main Footer Content */}
       <div className="max-w-7xl mx-auto px-6 pt-16 pb-8">
         
-        {/* Newsletter Section */}
         <div className="bg-linear-to-br from-orange-500/10 to-red-500/5 rounded-3xl p-8 border border-orange-500/10 mb-12 flex flex-col lg:flex-row items-center justify-between gap-6">
           <div className="text-center lg:text-left">
             <h3 className="text-xl font-extrabold text-white tracking-tight">Subscribe to our Newsletter</h3>
@@ -27,10 +25,8 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Top Section - 3 Columns */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
           
-          {/* Brand Section */}
           <div className="space-y-4">
             <Link to="/" className="flex items-center gap-2.5 w-fit">
               <img
@@ -45,7 +41,6 @@ export default function Footer() {
             <p className="text-neutral-500 text-sm leading-relaxed max-w-xs">
               Delivering happiness to your doorstep. Fresh, delicious food and fast service anytime, anywhere!
             </p>
-            {/* Social Icons */}
             <div className="flex gap-3 pt-2">
               <a href="#" className="w-8 h-8 rounded-lg bg-neutral-900 hover:bg-orange-600 hover:text-white transition flex items-center justify-center text-neutral-400">
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -65,7 +60,6 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Quick Links */}
           <div className="space-y-4 md:pl-10">
             <h3 className="text-sm font-extrabold text-white uppercase tracking-wider">Quick Links</h3>
             <ul className="space-y-3 text-sm">
@@ -76,7 +70,6 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Contact Info */}
           <div className="space-y-4">
             <h3 className="text-sm font-extrabold text-white uppercase tracking-wider">Contact</h3>
             <ul className="space-y-3.5 text-sm text-neutral-400">
@@ -110,7 +103,6 @@ export default function Footer() {
 
         </div>
 
-        {/* Bottom Section */}
         <div className="border-t border-neutral-900/80 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-neutral-500">
           <p className="text-center md:text-left">&copy; {currentYear} FoodRush. All rights reserved.</p>
           <div className="flex flex-wrap justify-center gap-6">

@@ -5,10 +5,6 @@ import { logout } from "../redux/userSlice";
 import { clearCart } from "../redux/cartSlice";
 import { clearActiveOrder } from "../redux/orderSlice";
 
-/**
- * FE 05: Custom Hook - useAuth
- * Decouples user authentication state and methods from UI components.
- */
 export function useAuth() {
   const dispatch = useDispatch();
   const { user, isLoggedIn } = useSelector((state) => state.user || {});

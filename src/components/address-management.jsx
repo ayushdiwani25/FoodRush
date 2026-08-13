@@ -31,7 +31,6 @@ export default function AddressManagement() {
           addresses: updatedAddresses
         });
 
-        // Update Redux
         dispatch(addAddress(newAddress));
 
         setFormData({ label: "", street: "", city: "", pinCode: "", phone: "" });
@@ -52,7 +51,6 @@ export default function AddressManagement() {
         addresses: updatedAddresses
       });
 
-      // Update Redux
       dispatch(deleteAddress(address.id));
     } catch (error) {
       console.error("Error deleting address from Firestore:", error);
@@ -63,7 +61,6 @@ export default function AddressManagement() {
     <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200">
       <h3 className="text-2xl font-bold mb-4 text-gray-800">My Addresses</h3>
 
-      {/* Address List */}
       <div className="mb-6">
         {addresses.length > 0 ? (
           addresses.map(address => (
@@ -102,7 +99,6 @@ export default function AddressManagement() {
         )}
       </div>
 
-      {/* Add Address Form */}
       {!showForm ? (
         <button
           type="button"

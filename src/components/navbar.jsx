@@ -3,7 +3,6 @@ import { NavLink, Link } from "react-router-dom";
 import { m, AnimatePresence } from "framer-motion";
 import { useAuth } from "../hooks";
 
-// ===== HELPER: Navigation Links Data =====
 const NAVBAR_LINKS = [
   {
     path: "/",
@@ -43,7 +42,6 @@ const NAVBAR_LINKS = [
   }
 ];
 
-// ===== HELPER: Navigation Link Component =====
 function NavbarLink({ path, label, icon }) {
   return (
     <li>
@@ -66,7 +64,6 @@ function NavbarLink({ path, label, icon }) {
   );
 }
 
-// ===== HELPER: User Avatar or Login Button =====
 function UserSection({ user, isLoggedIn, isAdmin, userName }) {
   if (isLoggedIn && user) {
     return (
@@ -128,7 +125,6 @@ function UserSection({ user, isLoggedIn, isAdmin, userName }) {
 }
 
 export default function Navbar({ cartCount = 0 }) {
-  // FE 05: Abstract user state via custom hook
   const { user, isLoggedIn, isAdmin, userName } = useAuth();
   
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -161,7 +157,6 @@ export default function Navbar({ cartCount = 0 }) {
         }}
       >
         <div className="flex items-center justify-between px-4 md:px-8 py-3.5">
-          {/* Logo */}
           <Link 
             to="/" 
             className="flex items-center gap-2 rounded-lg focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:outline-none" 
@@ -185,14 +180,12 @@ export default function Navbar({ cartCount = 0 }) {
             </m.div>
           </Link>
 
-          {/* Desktop Navigation Links */}
           <ul className="hidden md:flex gap-6">
             {NAVBAR_LINKS.map(({ path, label, icon }) => (
               <NavbarLink key={path} path={path} label={label} icon={icon} />
             ))}
           </ul>
 
-          {/* Mobile Menu Toggle */}
           <button
             type="button"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -210,9 +203,7 @@ export default function Navbar({ cartCount = 0 }) {
             </svg>
           </button>
 
-          {/* Right Section: Cart + Orders + User */}
           <div className="flex items-center gap-2 md:gap-3">
-            {/* Cart Icon */}
             <Link
               to="/cart"
               className="relative min-w-[44px] min-h-[44px] flex items-center justify-center p-2 rounded-full bg-neutral-100 hover:bg-orange-50 text-neutral-700 hover:text-orange-600 border border-neutral-200/20 transition transform hover:scale-105 shadow-2xs focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:outline-none"
@@ -238,7 +229,6 @@ export default function Navbar({ cartCount = 0 }) {
               )}
             </Link>
 
-            {/* Orders Icon */}
             <Link
               to="/orders"
               className="min-w-[44px] min-h-[44px] flex items-center justify-center p-2 rounded-full bg-neutral-100 hover:bg-orange-50 text-neutral-700 hover:text-orange-600 border border-neutral-200/20 transition transform hover:scale-105 shadow-2xs focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:outline-none"
@@ -271,12 +261,10 @@ export default function Navbar({ cartCount = 0 }) {
               </m.svg>
             </Link>
 
-            {/* User Section */}
             <UserSection user={user} isLoggedIn={isLoggedIn} isAdmin={isAdmin} userName={userName} />
           </div>
         </div>
 
-        {/* Mobile Menu Dropdown */}
         <AnimatePresence>
           {isMobileMenuOpen && (
             <m.div

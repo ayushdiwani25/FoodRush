@@ -6,7 +6,6 @@ const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    // Add item to cart or update quantity if exists
     addToCart: (state, action) => {
       const existingItem = state.find(i => i.id === action.payload.id);
       if (existingItem) {
@@ -17,14 +16,12 @@ const cartSlice = createSlice({
       localStorage.setItem("cart", JSON.stringify(state));
     },
 
-    // Remove item from cart
     removeFromCart: (state, action) => {
       const filtered = state.filter((item) => item.id !== action.payload);
       localStorage.setItem("cart", JSON.stringify(filtered));
       return filtered;
     },
 
-    // Update item quantity
     updateQuantity: (state, action) => {
       const { id, qty } = action.payload;
       const item = state.find(item => item.id === id);
@@ -34,7 +31,6 @@ const cartSlice = createSlice({
       localStorage.setItem("cart", JSON.stringify(state));
     },
 
-    // Clear entire cart
     clearCart: () => {
       localStorage.setItem("cart", JSON.stringify([]));
       return [];

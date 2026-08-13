@@ -20,7 +20,6 @@ export default function RestaurantAdminPanel() {
   const [filterCategory, setFilterCategory] = useState("All");
   const [itemsLoading, setItemsLoading] = useState(false);
 
-  // Form state
   const [formData, setFormData] = useState({
     name: "",
     desc: "",
@@ -30,14 +29,12 @@ export default function RestaurantAdminPanel() {
     badge: ""
   });
 
-  // Redirect if not logged in
   useEffect(() => {
     if (!isLoggedIn) {
       navigate("/login");
     }
   }, [isLoggedIn, navigate]);
 
-  // Load restaurant items from Firestore
   const loadItemsForRestaurant = useCallback(async (restaurant, allMenusList = null) => {
     setItemsLoading(true);
     try {
@@ -56,7 +53,6 @@ export default function RestaurantAdminPanel() {
     }
   }, [dispatch]);
 
-  // Initialize and load all restaurants from Firestore
   useEffect(() => {
     const fetchRestaurants = async () => {
       try {
@@ -69,7 +65,6 @@ export default function RestaurantAdminPanel() {
           setSelectedRestaurant(firstRestaurant);
           dispatch(setCurrentRestaurant(firstRestaurant));
           
-          // Fetch menus
           const menuSnap = await getDocs(collection(db, "menus"));
           const allMenus = menuSnap.docs.map(doc => doc.data());
           loadItemsForRestaurant(firstRestaurant, allMenus);
@@ -105,7 +100,6 @@ export default function RestaurantAdminPanel() {
     }
 
     if (editingItem) {
-      // Update existing item in Firestore
       const updatedItem = {
         ...editingItem,
         ...formData,
@@ -122,7 +116,6 @@ export default function RestaurantAdminPanel() {
       }
       setEditingItem(null);
     } else {
-      // Add new item to Firestore
       try {
         const menusRef = collection(db, "menus");
         const newDocRef = doc(menusRef); // Auto doc ID
@@ -136,7 +129,6 @@ export default function RestaurantAdminPanel() {
         };
         await setDoc(newDocRef, newItem);
 
-        // Update the selected restaurant's menu array in Firestore
         const restDocRef = doc(db, "restaurants", selectedRestaurant.id.toString());
         const updatedMenu = [...selectedRestaurant.menu, newItem.id];
         await updateDoc(restDocRef, {
@@ -145,7 +137,6 @@ export default function RestaurantAdminPanel() {
 
         dispatch(addItem(newItem));
         
-        // Update local restaurant state menu array
         const updatedRest = { ...selectedRestaurant, menu: updatedMenu };
         setSelectedRestaurant(updatedRest);
         dispatch(setCurrentRestaurant(updatedRest));
@@ -154,7 +145,6 @@ export default function RestaurantAdminPanel() {
       }
     }
 
-    // Reset form
     setFormData({
       name: "",
       desc: "",
@@ -182,11 +172,9 @@ export default function RestaurantAdminPanel() {
   const handleDeleteItem = async (itemId) => {
     if (window.confirm("Are you sure you want to delete this item?")) {
       try {
-        // 1. Delete the item from menus collection
         const itemDocRef = doc(db, "menus", itemId.toString());
         await deleteDoc(itemDocRef);
 
-        // 2. Remove the itemId from the selected restaurant's menu array
         const restDocRef = doc(db, "restaurants", selectedRestaurant.id.toString());
         const updatedMenu = selectedRestaurant.menu.filter(id => id !== itemId);
         await updateDoc(restDocRef, {
@@ -195,7 +183,6 @@ export default function RestaurantAdminPanel() {
 
         dispatch(deleteItem(itemId));
 
-        // Update local restaurant state menu array
         const updatedRest = { ...selectedRestaurant, menu: updatedMenu };
         setSelectedRestaurant(updatedRest);
         dispatch(setCurrentRestaurant(updatedRest));
@@ -218,12 +205,10 @@ export default function RestaurantAdminPanel() {
     });
   };
 
-  // Check if item is from original menu or custom
   const isMenuItemFromData = (item) => {
     return selectedRestaurant && selectedRestaurant.menu.includes(item.id);
   };
 
-  // Filter items
   const filteredItems = items.filter(item => {
     const matchesSearch = item.name.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesCategory = filterCategory === "All" || item.category === filterCategory;
@@ -239,7 +224,6 @@ export default function RestaurantAdminPanel() {
   return (
     <div className="min-h-screen bg-gray-100 pt-20 pb-10">
       <div className="max-w-7xl mx-auto px-4">
-        {/* Header */}
         <m.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -250,7 +234,6 @@ export default function RestaurantAdminPanel() {
         </m.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-          {/* Sidebar - Restaurant Selection */}
           <div className="bg-white rounded-lg shadow-md p-4 h-fit">
             <h2 className="text-xl font-bold text-gray-800 mb-4">Your Restaurants</h2>
             <div className="space-y-2">
@@ -271,11 +254,9 @@ export default function RestaurantAdminPanel() {
             </div>
           </div>
 
-          {/* Main Content */}
           <div className="lg:col-span-3">
             {selectedRestaurant ? (
               <>
-                {/* Restaurant Info Card */}
                 <m.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
@@ -296,7 +277,6 @@ export default function RestaurantAdminPanel() {
                   </div>
                 </m.div>
 
-                {/* Search and Filter */}
                 <div className="bg-white rounded-lg shadow-md p-6 mb-6">
                   <div className="flex flex-col md:flex-row gap-4 mb-4">
                     <input
@@ -325,7 +305,6 @@ export default function RestaurantAdminPanel() {
                   </div>
                 </div>
 
-                {/* Add/Edit Form */}
                 {showAddForm && (
                   <m.div
                     initial={{ opacity: 0, y: -10 }}
@@ -446,7 +425,6 @@ export default function RestaurantAdminPanel() {
                   </m.div>
                 )}
 
-                {/* Items List */}
                 <div className="bg-white rounded-lg shadow-md overflow-hidden">
                   <div className="p-6 border-b border-gray-200">
                     <h3 className="text-2xl font-bold text-gray-800">

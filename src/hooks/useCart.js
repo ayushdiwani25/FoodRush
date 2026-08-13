@@ -2,10 +2,6 @@ import { useMemo, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { addToCart, removeFromCart, updateQuantity, clearCart } from "../redux/cartSlice";
 
-/**
- * FE 05 & FE 07: Custom Hook - useCart
- * Encapsulates cart state, memoized calculations (FE 07), and dispatch actions.
- */
 export function useCart() {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart || []);

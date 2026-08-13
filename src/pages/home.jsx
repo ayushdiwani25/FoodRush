@@ -15,7 +15,6 @@ export default function Home() {
   return (
     <div className="relative min-h-screen bg-[#FCFBF7] text-neutral-800 flex flex-col font-sans">
       
-      {/* Hero Section */}
       <section 
         aria-label="Hero Section"
         className="relative w-full overflow-hidden bg-cover bg-center bg-no-repeat flex flex-col justify-center min-h-[85vh] lg:min-h-[90vh] px-6 lg:px-20 py-20"
@@ -29,7 +28,6 @@ export default function Home() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          {/* Hero Heading */}
           <m.h1 
             initial={{ opacity: 0, y: -30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -40,7 +38,6 @@ export default function Home() {
             Delivered <span className="text-transparent bg-clip-text bg-linear-to-r from-orange-400 to-amber-300">To Your Door</span>
           </m.h1>
 
-          {/* Description */}
           <m.p 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -50,7 +47,6 @@ export default function Home() {
             Craving something delicious? Order from the best local restaurants. Fast delivery, fresh food, and great deals right to your doorstep.
           </m.p>
 
-          {/* Action Button */}
           <m.button
             onClick={() => navigate("/food")}
             aria-label="Explore food menu"
@@ -71,7 +67,6 @@ export default function Home() {
             </m.span>
           </m.button>
 
-          {/* Stats */}
           <m.div 
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -103,7 +98,6 @@ export default function Home() {
         </m.div>
       </section>
 
-      {/* About Section */}
       <section 
         aria-label="About FoodRush"
         className="relative bg-[#FAF9F6] border-y border-neutral-100/50 py-24 px-6 lg:px-20"
@@ -131,7 +125,6 @@ export default function Home() {
         </m.div>
       </section>
 
-      {/* Image Gallery */}
       <section 
         aria-label="Featured Food Categories"
         className="max-w-6xl mx-auto w-full px-6 py-20 relative z-20"
@@ -160,10 +153,8 @@ export default function Home() {
                 }
               }}
             >
-              {/* Background overlay */}
               <div className="absolute inset-0 bg-linear-to-t from-neutral-900/80 via-neutral-900/10 to-transparent z-10 transition-all duration-300 pointer-events-none"></div>
               
-              {/* FE 07: Optimized Image component for CLS prevention */}
               <OptimizedImage
                 src={item.img}
                 alt={`${item.label} food category`}
@@ -212,7 +203,6 @@ export default function Home() {
         </m.div>
       </section>
 
-      {/* Call to Action */}
       <section 
         aria-label="Order Call To Action"
         className="max-w-5xl mx-auto px-6 pb-24 w-full relative z-20"

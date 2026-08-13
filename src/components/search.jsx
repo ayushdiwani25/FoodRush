@@ -9,10 +9,9 @@ export default function SearchComponent({ onSearch }) {
   const navigate = useNavigate();
   const [query, setQuery] = useState("");
   const [results, setResults] = useState(null);
-  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
   const [restaurants, setRestaurants] = useState([]);
 
-  // FE 07: Debounce the user input to prevent excessive computation per keystroke
   const debouncedQuery = useDebounce(query, 200);
 
   useEffect(() => {
@@ -27,7 +26,6 @@ export default function SearchComponent({ onSearch }) {
     fetchSearchData();
   }, []);
 
-  // FE 07: Memoized suggestions calculation based on debounced search term
   const suggestions = useMemo(() => {
     if (!debouncedQuery.trim()) return [];
     const lowerValue = debouncedQuery.toLowerCase();
@@ -40,13 +38,7 @@ export default function SearchComponent({ onSearch }) {
       .slice(0, 5);
   }, [debouncedQuery, restaurants]);
 
-  useEffect(() => {
-    if (debouncedQuery.trim() && suggestions.length > 0) {
-      setShowSuggestions(true);
-    } else {
-      setShowSuggestions(false);
-    }
-  }, [debouncedQuery, suggestions]);
+  const showSuggestions = Boolean(isFocused && debouncedQuery.trim() && suggestions.length > 0);
 
   const handleInputChange = (e) => {
     setQuery(e.target.value);
@@ -57,7 +49,7 @@ export default function SearchComponent({ onSearch }) {
 
   const handleSuggestionClick = (item) => {
     setQuery(item.name);
-    setShowSuggestions(false);
+    setIsFocused(false);
     navigate(`/restaurant/${item.id}`);
     onSearch?.(item, "restaurants");
   };
@@ -69,7 +61,7 @@ export default function SearchComponent({ onSearch }) {
     }
 
     const lowerQuery = query.toLowerCase();
-    setShowSuggestions(false);
+    setIsFocused(false);
 
     const restaurantResults = restaurants.filter(
       (r) =>
@@ -84,7 +76,7 @@ export default function SearchComponent({ onSearch }) {
       e.preventDefault();
       handleSearch();
     } else if (e.key === "Escape") {
-      setShowSuggestions(false);
+      setIsFocused(false);
     }
   };
 
@@ -107,13 +99,12 @@ export default function SearchComponent({ onSearch }) {
             value={query}
             onChange={handleInputChange}
             onKeyDown={handleKeyDown}
-            onFocus={() => query.trim() && suggestions.length > 0 && setShowSuggestions(true)}
-            onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
+            onFocus={() => setIsFocused(true)}
+            onBlur={() => setTimeout(() => setIsFocused(false), 200)}
             className="w-full pl-11 pr-4 py-3.5 border border-neutral-200 rounded-xl focus:outline-hidden focus:border-orange-500 shadow-xs focus:ring-4 focus:ring-orange-500/10 transition-all text-neutral-800 placeholder-neutral-400 bg-white focus-visible:outline-orange-500"
           />
 
-          {/* Suggestions Dropdown (FE 09 accessible listbox) */}
-          {showSuggestions && suggestions.length > 0 && (
+          {showSuggestions && (
             <m.div
               role="listbox"
               aria-label="Search suggestions"

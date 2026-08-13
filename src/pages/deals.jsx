@@ -53,7 +53,6 @@ export default function DealsPage() {
   return (
     <div className="min-h-screen bg-[#FCFBF7] py-12 px-4 md:px-8 font-sans">
       <div className="max-w-6xl mx-auto">
-        {/* Header */}
         <m.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -67,7 +66,6 @@ export default function DealsPage() {
           </p>
         </m.div>
 
-        {/* Promo Codes Section */}
         <m.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -124,7 +122,6 @@ export default function DealsPage() {
           </div>
         </m.div>
 
-        {/* Restaurant Deals */}
         <m.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -192,7 +189,6 @@ export default function DealsPage() {
           </div>
         </m.div>
 
-        {/* How to Use */}
         <m.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
