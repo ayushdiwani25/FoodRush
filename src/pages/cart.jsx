@@ -1,165 +1,162 @@
-import { useSelector, useDispatch } from "react-redux";
-import { removeFromCart, updateQuantity } from "@/redux";
+import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useCart } from "../hooks";
+import { OptimizedImage } from "../components/ui";
 
 export default function Cart() {
-  const cartItems = useSelector((state) => state.cart || []);
-  const dispatch = useDispatch();
+  const { cartItems, subtotal, deliveryFee, tax, grandTotal, updateQty, removeItem } = useCart();
   const navigate = useNavigate();
 
-  // Helper function to get correct image URL for cart items
-  const getItemImage = (item) => {
-    return item.img;
-  };
-
-  const increaseQty = (id) => {
-    const item = cartItems.find((item) => item.id === id);
-    if (item) {
-      dispatch(updateQuantity({ id, qty: item.qty + 1 }));
-    }
-  };
-
-  const decreaseQty = (id) => {
-    const item = cartItems.find((item) => item.id === id);
-    if (item && item.qty > 1) {
-      dispatch(updateQuantity({ id, qty: item.qty - 1 }));
-    } else {
-      dispatch(removeFromCart(id));
-    }
-  };
-
-  const removeItem = (id) => {
-    dispatch(removeFromCart(id));
-  };
-
-  const totalPrice = cartItems.reduce(
-    (total, item) => total + item.price * item.qty,
-    0
-  );
-
-    return (
-      <div className="min-h-screen bg-linear-to-br from-orange-50 to-yellow-50 p-4 md:p-6">
+  return (
+    <div className="min-h-screen bg-linear-to-br from-orange-50/50 to-yellow-50/50 py-8 px-4 md:px-8 font-sans">
+      <div className="max-w-6xl mx-auto">
         {/* Title */}
-        <h1 className="text-2xl md:text-4xl font-extrabold text-center text-orange-600 mb-6 md:mb-10">
-          🛒 Your Cart
+        <h1 className="text-3xl md:text-4xl font-extrabold text-center text-neutral-900 mb-8 tracking-tight">
+          🛒 Your Shopping Cart
         </h1>
 
         {cartItems.length === 0 ? (
-          <div className="text-center text-gray-500 text-lg mt-12">
-            Your cart is empty 😢
-          </div>
-        ) : (
-          <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8">
-          {/* LEFT: Cart Items */}
-          <div className="md:col-span-2 space-y-6">
-            {cartItems.map((item) => (
-              <div
-                key={item.id}
-                className="flex flex-col sm:flex-row items-start gap-3 bg-white p-4 md:p-6 rounded-2xl shadow-md hover:shadow-xl transition"
-              >
-                {/* Image */}
-                <div className="w-full sm:w-28 md:w-32 h-32 sm:h-28 md:h-32 bg-linear-to-br from-orange-100 to-yellow-100 rounded-xl overflow-hidden shrink-0 flex items-center justify-center">
-                  <img
-                    src={getItemImage(item)}
-                    alt={item.name}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-
-                {/* Details */}
-                <div className="flex-1">
-                  <h2 className="font-bold text-lg text-gray-800">{item.name}</h2>
-
-                  {item.restaurantName && (
-                    <p className="text-sm text-orange-600 font-semibold mt-1">
-                      🏪 From: {item.restaurantName}
-                    </p>
-                  )}
-
-                  <span
-                    className={`text-sm inline-block mt-1 ${
-                      item.veg ? "text-green-600" : "text-red-500"
-                    }`}
-                  >
-                    {item.veg ? "Veg 🌱" : "Non-Veg 🍗"}
-                  </span>
-
-                  <p className="text-sm text-gray-600 mt-2">
-                    ₹{item.price} × {item.qty} = <span className="font-bold text-orange-600">₹{item.price * item.qty}</span>
-                  </p>
-
-                  {/* Quantity Controls */}
-                  <div className="flex flex-wrap items-center gap-2 sm:gap-3 mt-4">
-                    <button
-                      type="button"
-                      onClick={() => decreaseQty(item.id)}
-                      className="bg-orange-100 text-orange-600 px-3 py-2 rounded-lg hover:bg-orange-200 font-bold min-w-40px"
-                    >
-                      −
-                    </button>
-
-                    <span className="font-bold px-4 text-lg">{item.qty}</span>
-
-                    <button
-                      type="button"
-                      onClick={() => increaseQty(item.id)}
-                      className="bg-orange-100 text-orange-600 px-3 py-2 rounded-lg hover:bg-orange-200 font-bold min-w-10"
-                    >
-                      +
-                    </button>
-
-                    <button
-                      type="button"
-                      onClick={() => removeItem(item.id)}
-                      className="ml-auto bg-red-100 text-red-600 px-3 py-2 rounded-lg hover:bg-red-200 font-semibold w-full sm:w-auto mt-2 sm:mt-0"
-                    >
-                      Remove
-                    </button>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* RIGHT: Checkout Box */}
-          <div className="bg-white p-5 md:p-6 rounded-2xl shadow-lg h-fit sticky top-4 md:top-6 order-first md:order-last">
-            <h2 className="text-lg font-bold mb-4">Order Summary</h2>
-
-            {/* Item List */}
-            <div className="space-y-2 mb-4">
-              {cartItems.map((item) => (
-                <div key={item.id} className="flex justify-between text-sm">
-                  <span>
-                    {item.name} × {item.qty}
-                  </span>
-                  <span className="font-semibold text-orange-600">
-                    ₹{item.price * item.qty}
-                  </span>
-                </div>
-              ))}
-            </div>
-
-            {/* Divider */}
-            <hr className="my-3" />
-
-            {/* Total */}
-            <div className="flex justify-between text-xl font-bold mb-4">
-              <span>Total</span>
-              <span className="text-orange-600">₹{totalPrice}</span>
-            </div>
-
+          <div className="text-center bg-white p-12 rounded-3xl shadow-xs border border-neutral-100 max-w-md mx-auto">
+            <div className="text-6xl mb-4" aria-hidden="true">🛒</div>
+            <h2 className="text-xl font-bold text-neutral-800 mb-2">Your cart is empty</h2>
+            <p className="text-sm text-neutral-500 mb-6">Looks like you haven't added any delicious dishes yet.</p>
             <button
               type="button"
-              onClick={() => navigate("/checkout")}
-              className="w-full bg-linear-to-r from-orange-500 to-red-500 
-              hover:from-orange-600 hover:to-red-600 text-white py-3 rounded-xl 
-              text-lg font-semibold transition-all hover:scale-105"
+              onClick={() => navigate("/food")}
+              className="px-6 py-3 bg-orange-600 hover:bg-orange-700 text-white rounded-xl text-sm font-extrabold transition cursor-pointer shadow-sm focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:outline-none"
             >
-              Proceed to Checkout 🚀
+              Explore Menu
             </button>
           </div>
-        </div>
-      )}
+        ) : (
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+            {/* LEFT: Cart Items List */}
+            <main className="lg:col-span-2 space-y-4">
+              {cartItems.map((item) => (
+                <article
+                  key={item.id}
+                  className="flex flex-col sm:flex-row items-center gap-4 bg-white p-4 md:p-5 rounded-2xl border border-neutral-100 shadow-xs hover:shadow-md transition"
+                >
+                  {/* FE 07: Optimized Image component */}
+                  <div className="w-full sm:w-28 h-28 shrink-0 rounded-xl overflow-hidden">
+                    <OptimizedImage
+                      src={item.img}
+                      alt={item.name}
+                      className="w-full h-full object-cover"
+                      aspectRatio="h-full"
+                    />
+                  </div>
+
+                  {/* Details */}
+                  <div className="flex-1 w-full">
+                    <div className="flex justify-between items-start">
+                      <div>
+                        <h2 className="font-extrabold text-base text-neutral-900">{item.name}</h2>
+                        {item.restaurantName && (
+                          <p className="text-xs text-orange-600 font-bold mt-0.5">
+                            🏪 From: {item.restaurantName}
+                          </p>
+                        )}
+                      </div>
+                      <span className="text-lg font-black text-neutral-900">
+                        ${(Number(item.price) * (item.qty || 1)).toFixed(2)}
+                      </span>
+                    </div>
+
+                    <div className="mt-1">
+                      {item.veg ? (
+                        <span className="text-[11px] font-bold text-green-700 bg-green-50 px-2 py-0.5 rounded-md inline-flex items-center gap-1 border border-green-200/50">
+                          <span className="w-1.5 h-1.5 rounded-full bg-green-500" aria-hidden="true"></span> Veg
+                        </span>
+                      ) : (
+                        <span className="text-[11px] font-bold text-red-700 bg-red-50 px-2 py-0.5 rounded-md inline-flex items-center gap-1 border border-red-200/50">
+                          <span className="w-1.5 h-1.5 rounded-full bg-red-500" aria-hidden="true"></span> Non-Veg
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Quantity & Delete Controls */}
+                    <div className="flex items-center justify-between mt-4 pt-3 border-t border-neutral-50">
+                      <div className="flex items-center gap-2">
+                        <button
+                          type="button"
+                          onClick={() => updateQty(item.id, (item.qty || 1) - 1)}
+                          aria-label={`Decrease quantity of ${item.name}`}
+                          className="min-w-[36px] min-h-[36px] bg-neutral-100 hover:bg-orange-100 text-neutral-800 hover:text-orange-600 rounded-lg font-bold flex items-center justify-center transition focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:outline-none"
+                        >
+                          −
+                        </button>
+
+                        <span className="font-extrabold text-sm px-3 min-w-[24px] text-center" aria-label={`Quantity: ${item.qty || 1}`}>
+                          {item.qty || 1}
+                        </span>
+
+                        <button
+                          type="button"
+                          onClick={() => updateQty(item.id, (item.qty || 1) + 1)}
+                          aria-label={`Increase quantity of ${item.name}`}
+                          className="min-w-[36px] min-h-[36px] bg-neutral-100 hover:bg-orange-100 text-neutral-800 hover:text-orange-600 rounded-lg font-bold flex items-center justify-center transition focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:outline-none"
+                        >
+                          +
+                        </button>
+                      </div>
+
+                      <button
+                        type="button"
+                        onClick={() => removeItem(item.id)}
+                        aria-label={`Remove ${item.name} from cart`}
+                        className="text-xs font-bold text-red-600 hover:text-red-700 hover:bg-red-50 px-3 py-2 rounded-lg transition min-h-[36px] flex items-center gap-1 focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:outline-none"
+                      >
+                        <svg aria-hidden="true" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                        </svg>
+                        Remove
+                      </button>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </main>
+
+            {/* RIGHT: Order Summary Box */}
+            <aside className="bg-white p-6 rounded-3xl border border-neutral-100 shadow-lg sticky top-24">
+              <h2 className="text-lg font-black text-neutral-900 mb-4 border-b border-neutral-100 pb-3">Order Summary</h2>
+
+              <div className="space-y-2.5 text-sm mb-4">
+                <div className="flex justify-between text-neutral-600">
+                  <span>Subtotal</span>
+                  <span className="font-bold text-neutral-900">${subtotal.toFixed(2)}</span>
+                </div>
+                <div className="flex justify-between text-neutral-600">
+                  <span>Delivery Fee</span>
+                  <span className="font-bold text-neutral-900">
+                    {deliveryFee === 0 ? <span className="text-green-600 font-extrabold">FREE</span> : `$${deliveryFee.toFixed(2)}`}
+                  </span>
+                </div>
+                <div className="flex justify-between text-neutral-600">
+                  <span>Estimated Tax (8%)</span>
+                  <span className="font-bold text-neutral-900">${tax.toFixed(2)}</span>
+                </div>
+              </div>
+
+              <div className="pt-3 border-t border-neutral-100 flex justify-between text-lg font-black text-neutral-900 mb-6">
+                <span>Total</span>
+                <span className="text-orange-600">${grandTotal.toFixed(2)}</span>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => navigate("/checkout")}
+                aria-label="Proceed to checkout"
+                className="w-full bg-linear-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white py-3.5 rounded-xl font-extrabold text-base transition-all transform hover:scale-[1.02] shadow-md flex items-center justify-center gap-2 cursor-pointer min-h-[48px] focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:outline-none"
+              >
+                <span>Proceed to Checkout</span>
+                <span aria-hidden="true">🚀</span>
+              </button>
+            </aside>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

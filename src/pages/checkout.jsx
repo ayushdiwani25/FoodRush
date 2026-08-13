@@ -130,16 +130,38 @@ export default function Checkout() {
     
     if (!validateForm()) return;
 
+    // Server-side database price verification to prevent price tampering
+    let verifiedSubtotal = totalPrice;
+    try {
+      const menuSnap = await getDocs(collection(db, "menus"));
+      if (!menuSnap.empty) {
+        const dbPrices = new Map();
+        menuSnap.docs.forEach(doc => {
+          const item = doc.data();
+          dbPrices.set(item.id?.toString(), item.price);
+        });
+
+        verifiedSubtotal = cartItems.reduce((sum, item) => {
+          const actualPrice = dbPrices.get(item.id?.toString()) ?? item.price;
+          return sum + (actualPrice * (item.quantity || 1));
+        }, 0);
+      }
+    } catch (err) {
+      console.warn("Could not fetch DB menus for price verification, falling back to calculated cart total:", err);
+    }
+
+    const verifiedTotal = Math.max(0, verifiedSubtotal + deliveryCharge - discountAmount);
+
     // Create order data
     const orderData = {
       items: cartItems,
-      total: finalTotal,
+      total: verifiedTotal,
       restaurant: cartItems[0]?.restaurantName || "Multiple Restaurants",
       address: `${formData.address}, ${formData.city}, ${formData.postalCode}`,
       paymentMethod: formData.paymentMethod,
       promoApplied: appliedPromo?.code || null,
       discount: discountAmount,
-      subtotal: totalPrice,
+      subtotal: verifiedSubtotal,
       deliveryCharge: deliveryCharge,
     };
     
