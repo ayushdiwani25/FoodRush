@@ -55,7 +55,7 @@ export default function Cart() {
                         )}
                       </div>
                       <span className="text-lg font-black text-neutral-900">
-                        ${(Number(item.price) * (item.qty || 1)).toFixed(2)}
+                        ₹{Number(item.price) * (item.qty || 1)}
                       </span>
                     </div>
 
@@ -119,23 +119,23 @@ export default function Cart() {
               <div className="space-y-2.5 text-sm mb-4">
                 <div className="flex justify-between text-neutral-600">
                   <span>Subtotal</span>
-                  <span className="font-bold text-neutral-900">${subtotal.toFixed(2)}</span>
+                  <span className="font-bold text-neutral-900">₹{subtotal}</span>
                 </div>
                 <div className="flex justify-between text-neutral-600">
                   <span>Delivery Fee</span>
                   <span className="font-bold text-neutral-900">
-                    {deliveryFee === 0 ? <span className="text-green-600 font-extrabold">FREE</span> : `$${deliveryFee.toFixed(2)}`}
+                    {deliveryFee === 0 ? <span className="text-green-600 font-extrabold">FREE</span> : `₹${deliveryFee}`}
                   </span>
                 </div>
                 <div className="flex justify-between text-neutral-600">
-                  <span>Estimated Tax (8%)</span>
-                  <span className="font-bold text-neutral-900">${tax.toFixed(2)}</span>
+                  <span>Estimated Tax (5%)</span>
+                  <span className="font-bold text-neutral-900">₹{tax.toFixed(0)}</span>
                 </div>
               </div>
 
               <div className="pt-3 border-t border-neutral-100 flex justify-between text-lg font-black text-neutral-900 mb-6">
                 <span>Total</span>
-                <span className="text-orange-600">${grandTotal.toFixed(2)}</span>
+                <span className="text-orange-600">₹{grandTotal.toFixed(0)}</span>
               </div>
 
               <button

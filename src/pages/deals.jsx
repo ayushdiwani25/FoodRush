@@ -1,40 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { m } from "framer-motion";
-import { db } from "../firebase";
-import { collection, getDocs } from "firebase/firestore";
+import { useDealsQuery, usePromosQuery, useRestaurantsQuery } from "../hooks";
 
 export default function DealsPage() {
   const navigate = useNavigate();
   const [copiedCode, setCopiedCode] = useState(null);
-  const [deals, setDeals] = useState([]);
-  const [promos, setPromos] = useState([]);
-  const [restaurants, setRestaurants] = useState([]);
-  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchDealsData = async () => {
-      try {
-        setLoading(true);
-        const dealsSnap = await getDocs(collection(db, "deals"));
-        const dealsList = dealsSnap.docs.map(doc => doc.data());
-        setDeals(dealsList);
-
-        const promosSnap = await getDocs(collection(db, "promos"));
-        const promosList = promosSnap.docs.map(doc => doc.data());
-        setPromos(promosList);
-
-        const restSnap = await getDocs(collection(db, "restaurants"));
-        const restList = restSnap.docs.map(doc => doc.data());
-        setRestaurants(restList);
-      } catch (err) {
-        console.error("Error fetching deals data from Firestore:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchDealsData();
-  }, []);
+  const { data: deals = [], isLoading: isDealsLoading } = useDealsQuery();
+  const { data: promos = [], isLoading: isPromosLoading } = usePromosQuery();
+  const { data: restaurants = [], isLoading: isRestaurantsLoading } = useRestaurantsQuery();
+  const loading = isDealsLoading || isPromosLoading || isRestaurantsLoading;
 
   const handleCopyPromo = (code) => {
     navigator.clipboard.writeText(code);

@@ -3,8 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { m } from "framer-motion";
 import { addFavoriteRestaurant, addToCart, clearCart } from "@/redux";
-import { db } from "../firebase";
-import { doc, getDoc, collection, getDocs } from "firebase/firestore";
+import { useRestaurantDetailsQuery } from "../hooks";
 
 export default function RestaurantDetailsPage() {
   const { restaurantId } = useParams();
@@ -12,40 +11,13 @@ export default function RestaurantDetailsPage() {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart || []);
 
-  const [restaurant, setRestaurant] = useState(null);
-  const [restaurantMenu, setRestaurantMenu] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const { restaurant, restaurantMenu, isLoading: loading } = useRestaurantDetailsQuery(restaurantId);
   const [isFavorite, setIsFavorite] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [vegFilter, setVegFilter] = useState("all");
   const [addedItems, setAddedItems] = useState({});
   const [showReplaceModal, setShowReplaceModal] = useState(false);
   const [pendingItem, setPendingItem] = useState(null);
-
-  useEffect(() => {
-    const fetchRestaurantData = async () => {
-      try {
-        setLoading(true);
-        const docRef = doc(db, "restaurants", restaurantId);
-        const docSnap = await getDoc(docRef);
-
-        if (docSnap.exists()) {
-          const restData = docSnap.data();
-          setRestaurant(restData);
-
-          const menuSnapshot = await getDocs(collection(db, "menus"));
-          const allMenus = menuSnapshot.docs.map(d => d.data());
-          const matchedMenu = allMenus.filter(item => restData.menu.includes(item.id));
-          setRestaurantMenu(matchedMenu);
-        }
-      } catch (err) {
-        console.error("Error fetching restaurant details:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchRestaurantData();
-  }, [restaurantId]);
 
   if (loading) {
     return (
@@ -134,38 +106,63 @@ export default function RestaurantDetailsPage() {
         <div className="bg-white rounded-2xl shadow-lg p-6 md:p-8">
           <div className="flex justify-between items-start flex-wrap gap-4">
             <div className="flex-1">
-              <h1 className="text-4xl font-bold text-gray-800 mb-2">
+              <h1 className="text-3xl md:text-4xl font-extrabold text-neutral-900 mb-1 tracking-tight">
                 {restaurant.name}
               </h1>
-              <p className="text-gray-600 text-lg mb-4">
-                {restaurant.cuisines.join(" • ")}
+              <p className="text-orange-600 font-bold text-sm md:text-base mb-3">
+                {restaurant.cuisines?.join(", ")}
               </p>
-              <div className="flex flex-wrap gap-6">
+
+              <div className="flex items-center gap-2 mb-5 flex-wrap">
+                <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-amber-50 text-amber-600 font-bold text-xs border border-amber-200/60 shadow-2xs">
+                  <span className="text-amber-500">★</span>
+                  {restaurant.rating || "4.8"}
+                </span>
+
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border border-neutral-200 text-xs font-bold text-neutral-700 shadow-2xs">
+                  {restaurantMenu.some(i => i.veg) && !restaurantMenu.some(i => !i.veg) ? (
+                    <>
+                      <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
+                      <span>Pure Veg</span>
+                    </>
+                  ) : restaurantMenu.some(i => !i.veg) && !restaurantMenu.some(i => i.veg) ? (
+                    <>
+                      <span className="w-2 h-2 rounded-full bg-rose-500"></span>
+                      <span>Non-Veg</span>
+                    </>
+                  ) : (
+                    <>
+                      <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
+                      <span className="w-2 h-2 rounded-full bg-rose-500"></span>
+                      <span>Veg & Non-Veg</span>
+                    </>
+                  )}
+                </span>
+
+                <span className="text-neutral-400 font-bold text-xs">•</span>
+
+                <span className="text-xs font-bold text-neutral-500">
+                  {restaurant.location || "Ahmedabad"}
+                </span>
+              </div>
+
+              <div className="flex flex-wrap gap-6 pt-3 border-t border-neutral-100">
                 <div className="flex items-center gap-2">
-                  <span className="text-2xl">⭐</span>
+                  <span className="text-xl">🚚</span>
                   <div>
-                    <p className="font-bold text-lg text-gray-800">
-                      {restaurant.rating}
+                    <p className="font-bold text-sm text-gray-800">
+                      ₹{restaurant.deliveryFee ?? 29}
                     </p>
-                    <p className="text-sm text-gray-600">Rating</p>
+                    <p className="text-xs text-gray-500">Delivery Fee</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="text-2xl">🚚</span>
+                  <span className="text-xl">⏱️</span>
                   <div>
-                    <p className="font-bold text-lg text-gray-800">
-                      ₹{restaurant.deliveryFee}
+                    <p className="font-bold text-sm text-gray-800">
+                      {restaurant.deliveryTime || "25-35 mins"}
                     </p>
-                    <p className="text-sm text-gray-600">Delivery Fee</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className="text-2xl">⏱️</span>
-                  <div>
-                    <p className="font-bold text-lg text-gray-800">
-                      {restaurant.deliveryTime}
-                    </p>
-                    <p className="text-sm text-gray-600">Delivery Time</p>
+                    <p className="text-xs text-gray-500">Delivery Time</p>
                   </div>
                 </div>
               </div>

@@ -14,31 +14,31 @@ export default function Home() {
 
   return (
     <div className="relative min-h-screen bg-[#FCFBF7] text-neutral-800 flex flex-col font-sans">
-      
-      <section 
+
+      <section
         aria-label="Hero Section"
         className="relative w-full overflow-hidden bg-cover bg-center bg-no-repeat flex flex-col justify-center min-h-[85vh] lg:min-h-[90vh] px-6 lg:px-20 py-20"
         style={{
           backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.3) 60%, rgba(252, 251, 247, 1) 100%), url(https://res.cloudinary.com/dyoht5hxt/image/upload/f_auto,q_auto,w_1920,c_fill/v1780460184/background_zbrr9a.jpg)`,
         }}
       >
-        <m.div 
+        <m.div
           className="relative z-10 max-w-4xl"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <m.h1 
+          <m.h1
             initial={{ opacity: 0, y: -30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-5xl md:text-7xl font-extrabold text-white drop-shadow-md leading-[1.15] mb-6 tracking-tight"
           >
-            Deliciousness <br /> 
+            Deliciousness <br />
             Delivered <span className="text-transparent bg-clip-text bg-linear-to-r from-orange-400 to-amber-300">To Your Door</span>
           </m.h1>
 
-          <m.p 
+          <m.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
@@ -67,27 +67,27 @@ export default function Home() {
             </m.span>
           </m.button>
 
-          <m.div 
+          <m.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
             className="flex gap-4 pt-12 flex-wrap"
           >
-            <m.div 
+            <m.div
               className="flex flex-col bg-white/10 backdrop-blur-md rounded-xl px-5 py-4 border border-white/10 shadow-xs"
               whileHover={{ scale: 1.05, backgroundColor: "rgba(255, 255, 255, 0.15)" }}
             >
-              <span className="text-3xl font-black text-amber-300">1000+</span>
+              <span className="text-3xl font-black text-amber-300">20+</span>
               <span className="text-xs text-neutral-200 font-bold tracking-wide uppercase mt-1">Dishes</span>
             </m.div>
-            <m.div 
+            <m.div
               className="flex flex-col bg-white/10 backdrop-blur-md rounded-xl px-5 py-4 border border-white/10 shadow-xs"
               whileHover={{ scale: 1.05, backgroundColor: "rgba(255, 255, 255, 0.15)" }}
             >
-              <span className="text-3xl font-black text-amber-300">50+</span>
+              <span className="text-3xl font-black text-amber-300">20+</span>
               <span className="text-xs text-neutral-200 font-bold tracking-wide uppercase mt-1">Restaurants</span>
             </m.div>
-            <m.div 
+            <m.div
               className="flex flex-col bg-white/10 backdrop-blur-md rounded-xl px-5 py-4 border border-white/10 shadow-xs"
               whileHover={{ scale: 1.05, backgroundColor: "rgba(255, 255, 255, 0.15)" }}
             >
@@ -98,7 +98,7 @@ export default function Home() {
         </m.div>
       </section>
 
-      <section 
+      <section
         aria-label="About FoodRush"
         className="relative bg-[#FAF9F6] border-y border-neutral-100/50 py-24 px-6 lg:px-20"
       >
@@ -107,8 +107,8 @@ export default function Home() {
             <path strokeLinecap="round" strokeLinejoin="round" d="M4 3v7a6 6 0 006 6v3a2 2 0 002 2h0a2 2 0 002-2v-3a6 6 0 006-6V3M9 3v4M15 3v4" />
           </svg>
         </div>
-        
-        <m.div 
+
+        <m.div
           className="max-w-4xl mx-auto text-center"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -125,11 +125,11 @@ export default function Home() {
         </m.div>
       </section>
 
-      <section 
+      <section
         aria-label="Featured Food Categories"
         className="max-w-6xl mx-auto w-full px-6 py-20 relative z-20"
       >
-        <m.div 
+        <m.div
           className="grid grid-cols-1 sm:grid-cols-3 gap-8"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -154,14 +154,14 @@ export default function Home() {
               }}
             >
               <div className="absolute inset-0 bg-linear-to-t from-neutral-900/80 via-neutral-900/10 to-transparent z-10 transition-all duration-300 pointer-events-none"></div>
-              
+
               <OptimizedImage
                 src={item.img}
                 alt={`${item.label} food category`}
                 className="w-full h-full"
                 aspectRatio="h-full"
               />
-              
+
               <m.div
                 className="absolute bottom-5 left-5 right-5 bg-white/95 backdrop-blur-md py-4 px-5 rounded-2xl flex items-center justify-between z-20 border border-white/40 shadow-lg"
                 initial={{ y: 5, opacity: 0.95 }}
@@ -203,7 +203,7 @@ export default function Home() {
         </m.div>
       </section>
 
-      <section 
+      <section
         aria-label="Order Call To Action"
         className="max-w-5xl mx-auto px-6 pb-24 w-full relative z-20"
       >
@@ -232,7 +232,7 @@ export default function Home() {
           </m.button>
         </m.div>
       </section>
-    
+
     </div>
   );
 }

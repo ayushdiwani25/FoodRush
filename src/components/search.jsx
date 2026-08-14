@@ -1,30 +1,17 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { m } from "framer-motion";
-import { db } from "../firebase";
-import { collection, getDocs } from "firebase/firestore";
-import { useDebounce } from "../hooks";
+import { useDebounce, useRestaurantsQuery } from "../hooks";
 
 export default function SearchComponent({ onSearch }) {
   const navigate = useNavigate();
   const [query, setQuery] = useState("");
   const [results, setResults] = useState(null);
   const [isFocused, setIsFocused] = useState(false);
-  const [restaurants, setRestaurants] = useState([]);
+
+  const { data: restaurants = [] } = useRestaurantsQuery();
 
   const debouncedQuery = useDebounce(query, 200);
-
-  useEffect(() => {
-    const fetchSearchData = async () => {
-      try {
-        const restsSnap = await getDocs(collection(db, "restaurants"));
-        setRestaurants(restsSnap.docs.map((doc) => doc.data()));
-      } catch (err) {
-        console.error("Error fetching search data from Firestore:", err);
-      }
-    };
-    fetchSearchData();
-  }, []);
 
   const suggestions = useMemo(() => {
     if (!debouncedQuery.trim()) return [];

@@ -1,23 +1,22 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { m } from "framer-motion";
 import { useNavigate, useLocation } from "react-router-dom";
-import { db } from "../firebase";
-import { collection, getDocs } from "firebase/firestore";
-import { useCart, useDebounce } from "../hooks";
+import { useCart, useDebounce, useMenusQuery, useRestaurantsQuery } from "../hooks";
 import { OptimizedImage } from "../components/ui";
 
 export default function Food() {
   const { addItem: addToCartAction, cartItems } = useCart();
   const navigate = useNavigate();
   const location = useLocation();
-  
+
   const [addedItems, setAddedItems] = useState({});
   const [selectedCategory, setSelectedCategory] = useState(() => location.state?.category || "All");
   const [prevCategoryState, setPrevCategoryState] = useState(location.state?.category);
   const [searchQuery, setSearchQuery] = useState("");
-  const [menu, setMenu] = useState([]);
-  const [restaurants, setRestaurants] = useState([]);
-  const [loading, setLoading] = useState(true);
+
+  const { data: menu = [], isLoading: isMenuLoading } = useMenusQuery();
+  const { data: restaurants = [], isLoading: isRestaurantsLoading } = useRestaurantsQuery();
+  const loading = isMenuLoading || isRestaurantsLoading;
 
   const debouncedSearch = useDebounce(searchQuery, 250);
 
@@ -25,26 +24,6 @@ export default function Food() {
     setPrevCategoryState(location.state?.category);
     setSelectedCategory(location.state?.category || "All");
   }
-
-  useEffect(() => {
-    const fetchCatalogData = async () => {
-      try {
-        setLoading(true);
-        const menuSnap = await getDocs(collection(db, "menus"));
-        const menuList = menuSnap.docs.map((doc) => doc.data());
-        setMenu(menuList);
-
-        const restSnap = await getDocs(collection(db, "restaurants"));
-        const restList = restSnap.docs.map((doc) => doc.data());
-        setRestaurants(restList);
-      } catch (err) {
-        console.error("Error fetching menu or restaurants from Firestore:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchCatalogData();
-  }, []);
 
   const categories = useMemo(() => ["All", ...new Set(menu.map((item) => item.category))], [menu]);
 
@@ -131,7 +110,7 @@ export default function Food() {
             onChange={(e) => setSearchQuery(e.target.value)}
             className="w-full px-6 py-4 pl-12 bg-white border border-neutral-200 rounded-2xl shadow-xs focus:outline-hidden focus:border-orange-500 transition-all duration-300 focus:ring-4 focus:ring-orange-500/10 text-neutral-800 placeholder-neutral-400 font-semibold focus-visible:outline-orange-500"
           />
-          
+
           {searchQuery && (
             <m.button
               type="button"
@@ -147,7 +126,7 @@ export default function Food() {
             </m.button>
           )}
         </div>
-        
+
         {searchQuery && (
           <m.p
             initial={{ opacity: 0 }}
@@ -168,11 +147,10 @@ export default function Food() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             aria-pressed={selectedCategory === category}
-            className={`px-6 py-2.5 rounded-full text-sm font-extrabold transition-all duration-300 cursor-pointer border min-h-[44px] focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:outline-none ${
-              selectedCategory === category
+            className={`px-6 py-2.5 rounded-full text-sm font-extrabold transition-all duration-300 cursor-pointer border min-h-[44px] focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:outline-none ${selectedCategory === category
                 ? "bg-orange-50 text-orange-600 border-orange-100 shadow-2xs"
                 : "bg-white text-neutral-600 border-neutral-200 hover:bg-neutral-50"
-            }`}
+              }`}
           >
             {category}
           </m.button>
@@ -209,6 +187,11 @@ export default function Food() {
                     className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-300"
                     aspectRatio="h-full"
                   />
+                  {item.badge && (
+                    <span className="absolute top-3 left-3 bg-orange-600 text-white text-[10px] font-extrabold px-2.5 py-1 rounded-full shadow-xs">
+                      {item.badge}
+                    </span>
+                  )}
                   <div className="absolute inset-0 bg-neutral-950 opacity-0 group-hover:opacity-10 transition-opacity duration-300 pointer-events-none"></div>
                 </div>
 
@@ -217,11 +200,17 @@ export default function Food() {
                     {item.category}
                   </span>
 
-                  <h2 className="text-base font-extrabold text-neutral-900 mb-1.5 line-clamp-1 tracking-tight">
+                  <h2 className="text-base font-extrabold text-neutral-900 mb-1 line-clamp-1 tracking-tight">
                     {item.name}
                   </h2>
 
-                  <div className="mb-3">
+                  {item.desc && (
+                    <p className="text-xs text-neutral-500 line-clamp-2 mb-2 leading-relaxed">
+                      {item.desc}
+                    </p>
+                  )}
+
+                  <div className="mb-3 flex items-center justify-between">
                     {item.veg ? (
                       <span className="flex items-center gap-1.5 text-xs font-bold text-green-700 bg-green-50 border border-green-200/50 px-2 py-0.5 rounded-md w-fit">
                         <span className="w-1.5 h-1.5 rounded-full bg-green-500" aria-hidden="true"></span>
@@ -231,6 +220,12 @@ export default function Food() {
                       <span className="flex items-center gap-1.5 text-xs font-bold text-red-700 bg-red-50 border border-red-200/50 px-2 py-0.5 rounded-md w-fit">
                         <span className="w-1.5 h-1.5 rounded-full bg-red-500" aria-hidden="true"></span>
                         Non-Veg
+                      </span>
+                    )}
+
+                    {item.time && (
+                      <span className="text-xs text-neutral-500 font-medium flex items-center gap-1">
+                        ⏱ {item.time}
                       </span>
                     )}
                   </div>
@@ -244,7 +239,7 @@ export default function Food() {
                   <div className="mt-auto pt-3 border-t border-neutral-100 flex items-center justify-between">
                     <div>
                       <span className="text-xs text-neutral-400 block font-medium">Price</span>
-                      <span className="text-lg font-black text-neutral-900">${Number(item.price).toFixed(2)}</span>
+                      <span className="text-lg font-black text-neutral-900">₹{item.price}</span>
                     </div>
 
                     <m.button
@@ -254,11 +249,10 @@ export default function Food() {
                       aria-label={`Add ${item.name} to cart`}
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      className={`px-4 py-2.5 rounded-xl font-extrabold text-xs transition-all duration-300 flex items-center gap-1.5 shadow-xs cursor-pointer min-h-[40px] focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:outline-none ${
-                        addedItems[item.id]
+                      className={`px-4 py-2.5 rounded-xl font-extrabold text-xs transition-all duration-300 flex items-center gap-1.5 shadow-xs cursor-pointer min-h-[40px] focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:outline-none ${addedItems[item.id]
                           ? "bg-green-600 text-white"
                           : "bg-orange-600 hover:bg-orange-700 text-white"
-                      }`}
+                        }`}
                     >
                       {addedItems[item.id] ? (
                         <>
@@ -268,12 +262,7 @@ export default function Food() {
                           Added!
                         </>
                       ) : (
-                        <>
-                          <svg aria-hidden="true" className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
-                          </svg>
-                          Add to Cart
-                        </>
+                        "Add to Cart"
                       )}
                     </m.button>
                   </div>

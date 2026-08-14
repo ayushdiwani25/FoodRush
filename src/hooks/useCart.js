@@ -15,11 +15,11 @@ export function useCart() {
   }, [cartItems]);
 
   const deliveryFee = useMemo(() => {
-    return subtotal > 0 ? (subtotal > 30 ? 0 : 2.99) : 0;
+    return subtotal > 0 ? (subtotal >= 500 ? 0 : 29) : 0;
   }, [subtotal]);
 
   const tax = useMemo(() => {
-    return subtotal * 0.08; // 8% estimated tax
+    return Math.round(subtotal * 0.05); // 5% GST
   }, [subtotal]);
 
   const grandTotal = useMemo(() => {

@@ -94,7 +94,7 @@ export default function ProfilePage() {
   const handleLogout = async () => {
     try {
       await signOut(auth);
-      dispatch(logout());  // Clear Redux store
+      dispatch(logout());
       navigate("/login");
     } catch (error) {
       console.error("Logout error:", error);
