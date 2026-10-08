@@ -194,7 +194,11 @@ export default function Checkout() {
     return (
       <div className="min-h-screen bg-linear-to-br from-green-50 to-emerald-50 flex items-center justify-center p-6">
         <div className="bg-white p-8 rounded-2xl shadow-2xl text-center max-w-md">
-          <div className="text-6xl mb-4">✅</div>
+          <div className="w-16 h-16 mx-auto mb-4 bg-green-100 text-green-600 rounded-full flex items-center justify-center">
+            <svg className="w-10 h-10" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+            </svg>
+          </div>
           <h1 className="text-3xl font-bold text-green-600 mb-2">
             Order Confirmed!
           </h1>
@@ -235,7 +239,7 @@ export default function Checkout() {
     <div className="min-h-screen bg-linear-to-br from-orange-50 to-yellow-50 p-6">
       <div className="max-w-6xl mx-auto">
         <h1 className="text-4xl font-extrabold text-center text-orange-600 mb-10">
-          🛍️ Checkout
+          Checkout
         </h1>
 
         <div className="grid md:grid-cols-3 gap-8">
@@ -332,7 +336,7 @@ export default function Checkout() {
                         className="w-4 h-4 text-orange-500"
                       />
                       <span className="ml-3 text-gray-700 font-medium">
-                        💳 Credit/Debit Card
+                        Credit/Debit Card
                       </span>
                     </label>
                     <label className="flex items-center cursor-pointer">
@@ -345,7 +349,7 @@ export default function Checkout() {
                         className="w-4 h-4 text-orange-500"
                       />
                       <span className="ml-3 text-gray-700 font-medium">
-                        📱 UPI
+                        UPI
                       </span>
                     </label>
                     <label className="flex items-center cursor-pointer">
@@ -358,7 +362,7 @@ export default function Checkout() {
                         className="w-4 h-4 text-orange-500"
                       />
                       <span className="ml-3 text-gray-700 font-medium">
-                        💰 Cash on Delivery
+                        Cash on Delivery
                       </span>
                     </label>
                   </div>
@@ -395,7 +399,7 @@ export default function Checkout() {
               <hr className="my-4" />
 
               <div className="mb-4 p-3 bg-blue-50 rounded-lg">
-                <h3 className="text-sm font-bold text-gray-800 mb-2">💰 Promo Code</h3>
+                <h3 className="text-sm font-bold text-gray-800 mb-2">Promo Code</h3>
                 {appliedPromo ? (
                   <div className="flex justify-between items-center bg-green-100 p-2 rounded border border-green-300 mb-2">
                     <div>
@@ -483,7 +487,7 @@ export default function Checkout() {
                 hover:from-orange-600 hover:to-red-600 text-white py-3 rounded-xl 
                 text-lg font-semibold transition-all hover:scale-105"
               >
-                Place Order 🚀
+                Place Order
               </button>
 
               <button

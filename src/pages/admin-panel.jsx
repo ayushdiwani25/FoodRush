@@ -229,7 +229,7 @@ export default function RestaurantAdminPanel() {
           animate={{ opacity: 1, y: 0 }}
           className="mb-8"
         >
-          <h1 className="text-4xl font-bold text-gray-800 mb-2">🍽️ Restaurant Admin Panel</h1>
+          <h1 className="text-4xl font-bold text-gray-800 mb-2">Restaurant Admin Panel</h1>
           <p className="text-gray-600">Manage your restaurant menu items</p>
         </m.div>
 
@@ -267,8 +267,8 @@ export default function RestaurantAdminPanel() {
                       <h2 className="text-3xl font-bold text-gray-800 mb-2">
                         {selectedRestaurant.name}
                       </h2>
-                      <p className="text-gray-600 mb-2">📍 {selectedRestaurant.location}</p>
-                      <p className="text-gray-600">🍽️ {selectedRestaurant.cuisines.join(", ")}</p>
+                      <p className="text-gray-600 mb-2">{selectedRestaurant.location}</p>
+                      <p className="text-gray-600">{selectedRestaurant.cuisines.join(", ")}</p>
                     </div>
                     <div className="text-right">
                       <div className="text-3xl font-bold text-orange-500">⭐ {selectedRestaurant.rating}</div>
@@ -465,16 +465,16 @@ export default function RestaurantAdminPanel() {
                               </td>
                               <td className="px-6 py-4 text-gray-800 font-semibold">₹{item.price}</td>
                               <td className="px-6 py-4 text-gray-700">
-                                {item.veg ? "🥬 Veg" : "🍗 Non-Veg"}
+                                {item.veg ? "Veg" : "Non-Veg"}
                               </td>
                               <td className="px-6 py-4 text-gray-700">
                                 {isMenuItemFromData(item) ? (
                                   <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-semibold">
-                                    📋 Menu
+                                    Menu
                                   </span>
                                 ) : (
                                   <span className="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm font-semibold">
-                                    ✨ Custom
+                                    Custom
                                   </span>
                                 )}
                               </td>
@@ -493,14 +493,14 @@ export default function RestaurantAdminPanel() {
                                   onClick={() => handleEditItem(item)}
                                   className="px-3 py-1 bg-blue-500 text-white rounded-lg text-sm hover:bg-blue-600 transition"
                                 >
-                                  ✏️ Edit
+                                  Edit
                                 </button>
                                 <button
                                   type="button"
                                   onClick={() => handleDeleteItem(item.id)}
                                   className="px-3 py-1 bg-red-500 text-white rounded-lg text-sm hover:bg-red-600 transition"
                                 >
-                                  🗑️ Delete
+                                  Delete
                                 </button>
                               </td>
                             </m.tr>
@@ -510,7 +510,7 @@ export default function RestaurantAdminPanel() {
                     </div>
                   ) : (
                     <div className="p-8 text-center text-gray-500">
-                      <p className="text-lg">No items found. Add your first item to get started! 🍴</p>
+                      <p className="text-lg">No items found. Add your first item to get started!</p>
                     </div>
                   )}
                 </div>

@@ -256,15 +256,15 @@ export default function OrdersPage() {
   const getStatusIcon = (status) => {
     switch (status) {
       case "Placed":
-        return "⏳";
+        return "•";
       case "Confirmed":
         return "✓";
       case "Out for Delivery":
-        return "🚴";
+        return "→";
       case "Delivered":
         return "✓✓";
       case "Cancelled":
-        return "✗";
+        return "✕";
       default:
         return "•";
     }
@@ -371,7 +371,7 @@ export default function OrdersPage() {
                     </div>
 
                     <div>
-                      <p className="text-xs text-gray-600 mb-1">🚚 Delivery</p>
+                      <p className="text-xs text-gray-600 mb-1">Delivery</p>
                       <p className="font-semibold text-gray-800">
                         {order.estimatedDelivery}
                       </p>
@@ -383,14 +383,14 @@ export default function OrdersPage() {
                     </div>
 
                     <div>
-                      <p className="text-xs text-gray-600 mb-1">📍 Location</p>
+                      <p className="text-xs text-gray-600 mb-1">Location</p>
                       <p className="font-semibold text-gray-800 truncate">
                         {order.address}
                       </p>
                     </div>
 
                     <div>
-                      <p className="text-xs text-gray-600 mb-1">📅 Date</p>
+                      <p className="text-xs text-gray-600 mb-1">Date</p>
                       <p className="font-semibold text-gray-800 text-sm">
                         {new Date(order.createdAt).toLocaleDateString()}
                       </p>
@@ -419,7 +419,7 @@ export default function OrdersPage() {
                           <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-300 ${
                             getStatusStepIndex(order.status) >= 1 ? "bg-orange-500 text-white shadow-md scale-110" : "bg-gray-200 text-gray-400"
                           }`}>
-                            🛍️
+                            1
                           </div>
                           <span className={`text-[10px] font-bold mt-1.5 ${getStatusStepIndex(order.status) >= 1 ? "text-orange-600" : "text-gray-400"}`}>Placed</span>
                         </div>
@@ -428,7 +428,7 @@ export default function OrdersPage() {
                           <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-300 ${
                             getStatusStepIndex(order.status) >= 2 ? "bg-orange-500 text-white shadow-md scale-110" : "bg-gray-200 text-gray-400"
                           }`}>
-                            👨‍🍳
+                            2
                           </div>
                           <span className={`text-[10px] font-bold mt-1.5 ${getStatusStepIndex(order.status) >= 2 ? "text-orange-600" : "text-gray-400"}`}>Preparing</span>
                         </div>
@@ -437,7 +437,7 @@ export default function OrdersPage() {
                           <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-300 ${
                             getStatusStepIndex(order.status) >= 3 ? "bg-orange-500 text-white shadow-md scale-110" : "bg-gray-200 text-gray-400"
                           }`}>
-                            🚴
+                            3
                           </div>
                           <span className={`text-[10px] font-bold mt-1.5 ${getStatusStepIndex(order.status) >= 3 ? "text-orange-600" : "text-gray-400"}`}>On the Way</span>
                         </div>
@@ -446,7 +446,7 @@ export default function OrdersPage() {
                           <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-300 ${
                             getStatusStepIndex(order.status) >= 4 ? "bg-green-500 text-white shadow-md scale-110" : "bg-gray-200 text-gray-400"
                           }`}>
-                            🏠
+                            ✓
                           </div>
                           <span className={`text-[10px] font-bold mt-1.5 ${getStatusStepIndex(order.status) >= 4 ? "text-green-600" : "text-gray-400"}`}>Delivered</span>
                         </div>
@@ -457,8 +457,10 @@ export default function OrdersPage() {
                   {(order.status === "Out for Delivery" || order.status === "Delivered") && (
                     <div className="mb-6 p-4 bg-gray-50 border border-gray-150 rounded-xl flex flex-wrap items-center justify-between gap-4">
                       <div className="flex items-center gap-3">
-                        <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center text-2xl">
-                          🚴
+                        <div className="w-12 h-12 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center">
+                          <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 18.75a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 0 1-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 0 0-3.213-9.193 2.056 2.056 0 0 0-1.58-.86H14.25M16.5 18.75h-2.25m0-11.25V3.75m0 3.75a2.25 2.25 0 0 1-2.25 2.25H9.75M14.25 7.5H9.75" />
+                          </svg>
                         </div>
                         <div>
                           <p className="text-[10px] text-neutral-400 font-bold uppercase tracking-wider">Delivery Partner</p>
@@ -471,7 +473,10 @@ export default function OrdersPage() {
                           href="tel:+919876543210"
                           className="px-3.5 py-2 bg-white text-gray-800 border border-gray-200 hover:bg-gray-50 font-bold text-xs rounded-lg shadow-2xs flex items-center gap-1.5 transition"
                         >
-                          📞 Call Partner
+                          <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" />
+                          </svg>
+                          <span>Call Partner</span>
                         </a>
                       </div>
                     </div>

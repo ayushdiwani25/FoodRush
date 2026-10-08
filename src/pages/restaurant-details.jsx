@@ -148,7 +148,11 @@ export default function RestaurantDetailsPage() {
 
               <div className="flex flex-wrap gap-6 pt-3 border-t border-neutral-100">
                 <div className="flex items-center gap-2">
-                  <span className="text-xl">🚚</span>
+                  <span className="w-8 h-8 rounded-full bg-neutral-100 text-neutral-600 flex items-center justify-center">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 18.75a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 0 1-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 0 0-3.213-9.193 2.056 2.056 0 0 0-1.58-.86H14.25M16.5 18.75h-2.25m0-11.25V3.75m0 3.75a2.25 2.25 0 0 1-2.25 2.25H9.75M14.25 7.5H9.75" />
+                    </svg>
+                  </span>
                   <div>
                     <p className="font-bold text-sm text-gray-800">
                       ₹{restaurant.deliveryFee ?? 29}
@@ -157,7 +161,11 @@ export default function RestaurantDetailsPage() {
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="text-xl">⏱️</span>
+                  <span className="w-8 h-8 rounded-full bg-neutral-100 text-neutral-600 flex items-center justify-center">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                    </svg>
+                  </span>
                   <div>
                     <p className="font-bold text-sm text-gray-800">
                       {restaurant.deliveryTime || "25-35 mins"}
@@ -174,12 +182,15 @@ export default function RestaurantDetailsPage() {
                 setIsFavorite(!isFavorite);
                 dispatch(addFavoriteRestaurant(restaurant));
               }}
-              className={`px-6 py-3 rounded-lg font-semibold transition ${isFavorite
+              className={`px-6 py-3 rounded-lg font-semibold transition flex items-center gap-2 ${isFavorite
                   ? "bg-red-100 text-red-600 border-2 border-red-600"
                   : "bg-gray-100 text-gray-600 border-2 border-gray-300"
                 }`}
             >
-              {isFavorite ? "❤️ Saved" : "🤍 Save"}
+              <svg className={`w-4 h-4 ${isFavorite ? "fill-red-600 stroke-red-600" : "fill-none stroke-gray-600"}`} viewBox="0 0 24 24" strokeWidth="2">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+              </svg>
+              <span>{isFavorite ? "Saved" : "Save"}</span>
             </button>
           </div>
 
@@ -327,7 +338,7 @@ export default function RestaurantDetailsPage() {
           >
             <div className="p-6">
               <h2 className="text-2xl font-bold text-gray-800 mb-3 flex items-center gap-2">
-                ⚠️ Replace cart items?
+                Replace cart items?
               </h2>
               <p className="text-gray-600 mb-6 leading-relaxed">
                 Your cart contains dishes from <span className="font-semibold text-gray-800">{cartItems[0]?.restaurantName}</span>. Discard these items and start a new order from <span className="font-semibold text-gray-800">{restaurant.name}</span>?

@@ -21,7 +21,7 @@
       "rating": 4.7,
       "time": "25-35 min",
       "img": "https://res.cloudinary.com/dyoht5hxt/image/upload/f_auto,q_auto,w_500,h_400,c_fill/v1780460236/BBQ-Chicken-Blaze_e5vbji.png",
-      "badge": "Spicy 🌶",
+      "badge": "Spicy",
       "veg": false
     },
     {
@@ -117,7 +117,7 @@
       "rating": 4.5,
       "time": "15-20 min",
       "img": "https://res.cloudinary.com/dyoht5hxt/image/upload/f_auto,q_auto,w_500,h_400,c_fill/v1780460250/Spicy-Volcano-Burger_xvnkor.png",
-      "badge": "Spicy 🌶",
+      "badge": "Spicy",
       "veg": false
     },
     {
@@ -694,7 +694,7 @@
       "minOrder": 200,
       "description": "50% off on first order",
       "validTill": "Limited Time",
-      "badge": "🎉 First Order"
+      "badge": "First Order"
     },
     {
       "code": "SAVE100",
@@ -702,7 +702,7 @@
       "minOrder": 500,
       "description": "Flat 100 off on orders above 500",
       "validTill": "March 31, 2026",
-      "badge": "💰 Save Now"
+      "badge": "Save Now"
     },
     {
       "code": "FRIEND20",
@@ -710,7 +710,7 @@
       "minOrder": 300,
       "description": "20% off with friend referral",
       "validTill": "Ongoing",
-      "badge": "👥 Share & Earn"
+      "badge": "Share & Earn"
     },
     {
       "code": "WEEKDAY30",
@@ -718,7 +718,7 @@
       "minOrder": 400,
       "description": "30% off on weekdays (Mon-Fri)",
       "validTill": "Ongoing",
-      "badge": "📅 Weekdays"
+      "badge": "Weekdays"
     },
     {
       "code": "COFFEE15",
@@ -726,7 +726,7 @@
       "minOrder": 200,
       "description": "15% off on cafe orders",
       "validTill": "April 30, 2026",
-      "badge": "☕ Cafe Special"
+      "badge": "Cafe Special"
     },
     {
       "code": "PIZZA25",
@@ -734,7 +734,7 @@
       "minOrder": 300,
       "description": "25% off on pizza orders",
       "validTill": "April 20, 2026",
-      "badge": "🍕 Pizza Mania"
+      "badge": "Pizza Mania"
     }
   ],
   "DEALS": [
@@ -745,7 +745,7 @@
       "description": "Upto 40% off",
       "validTill": "Today 11:59 PM",
       "restaurantId": 101,
-      "badge": "🔥 Hot Deal"
+      "badge": "Hot Deal"
     },
     {
       "id": 2,
@@ -754,7 +754,7 @@
       "description": "Upto 50% off",
       "validTill": "Tomorrow",
       "restaurantId": 102,
-      "badge": "🍔 Limited Time"
+      "badge": "Limited Time"
     },
     {
       "id": 3,
@@ -763,7 +763,7 @@
       "description": "Upto 35% off",
       "validTill": "Today 11:59 PM",
       "restaurantId": 103,
-      "badge": "🥤 Summer Special"
+      "badge": "Summer Special"
     },
     {
       "id": 4,
@@ -772,7 +772,7 @@
       "description": "Upto 20% off",
       "validTill": "Today",
       "restaurantId": 104,
-      "badge": "✨ Premium"
+      "badge": "Premium"
     },
     {
       "id": 5,
@@ -781,7 +781,7 @@
       "description": "Upto 45% off",
       "validTill": "This Week",
       "restaurantId": 105,
-      "badge": "💪 Best Combo"
+      "badge": "Best Combo"
     }
   ]
 }

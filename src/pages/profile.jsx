@@ -24,13 +24,13 @@ function TabButton({ active, label, onClick }) {
   );
 }
 
-function InfoCard({ icon, label, value }) {
+function InfoCard({ label, value }) {
   return (
     <m.div
       whileHover={{ scale: 1.05 }}
       className="bg-white rounded-lg p-5 shadow-md border-2 border-gray-200"
     >
-      <p className="text-gray-600 text-sm font-semibold mb-2">{icon} {label}</p>
+      <p className="text-gray-600 text-sm font-semibold mb-2">{label}</p>
       <p className="text-xl font-bold text-gray-800">{value || "Not added"}</p>
     </m.div>
   );
@@ -54,7 +54,11 @@ export default function ProfilePage() {
           animate={{ opacity: 1, scale: 1 }}
           className="text-center bg-white p-8 rounded-2xl shadow-lg border-2 border-orange-200"
         >
-          <p className="text-6xl mb-4">🔐</p>
+          <div className="w-16 h-16 mx-auto mb-4 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center">
+            <svg className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
+            </svg>
+          </div>
           <p className="text-2xl font-bold text-gray-800 mb-4">Please login to view your profile</p>
           <button
             type="button"
@@ -133,15 +137,15 @@ export default function ProfilePage() {
                   </m.div>
                   <div className="flex-1">
                     <h2 className="text-4xl font-bold text-gray-800">{user?.name}</h2>
-                    <p className="text-lg text-orange-600 font-semibold mt-2">📧 {user?.email}</p>
-                    <p className="text-sm text-gray-600">👤 {user?.isAdmin ? "👑 Admin Account" : "👤 Regular User"}</p>
+                    <p className="text-lg text-orange-600 font-semibold mt-2">{user?.email}</p>
+                    <p className="text-sm text-gray-600">{user?.isAdmin ? "Admin Account" : "Regular User"}</p>
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-                  <InfoCard icon="📱" label="Phone" value={user?.phone} />
-                  <InfoCard icon="📅" label="Member Since" value={user?.memberSince} />
-                  <InfoCard icon="🔐" label="Account Type" value={user?.isAdmin ? "👑 Admin" : "👤 User"} />
+                  <InfoCard label="Phone" value={user?.phone} />
+                  <InfoCard label="Member Since" value={user?.memberSince} />
+                  <InfoCard label="Account Type" value={user?.isAdmin ? "Admin" : "User"} />
                 </div>
 
                 <button
@@ -152,12 +156,12 @@ export default function ProfilePage() {
                   }}
                   className="px-8 py-3 bg-linear-to-r from-orange-500 to-red-500 text-white rounded-lg hover:from-orange-600 hover:to-red-600 font-semibold"
                 >
-                  ✏️ Edit Profile
+                  Edit Profile
                 </button>
               </div>
             ) : (
               <div>
-                <h3 className="text-2xl font-bold text-gray-800 mb-6">✏️ Edit Profile</h3>
+                <h3 className="text-2xl font-bold text-gray-800 mb-6">Edit Profile</h3>
 
                 {saveError && (
                   <div className="bg-red-50 border-2 border-red-200 text-red-600 px-4 py-3 rounded-lg mb-4 font-semibold">
@@ -204,14 +208,14 @@ export default function ProfilePage() {
                     disabled={saveLoading}
                     className="flex-1 px-6 py-3 bg-linear-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white rounded-lg font-bold disabled:opacity-50"
                   >
-                    {saveLoading ? "Saving..." : "💾 Save Changes"}
+                    {saveLoading ? "Saving..." : "Save Changes"}
                   </button>
                   <button
                     type="button"
                     onClick={() => setIsEditing(false)}
                     className="flex-1 px-6 py-3 bg-gray-400 hover:bg-gray-500 text-white rounded-lg font-bold"
                   >
-                    ❌ Cancel
+                    Cancel
                   </button>
                 </div>
               </div>
@@ -227,12 +231,12 @@ export default function ProfilePage() {
 
         {activeTab === "settings" && (
           <m.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="bg-white rounded-2xl p-8 shadow-md border-2 border-gray-200">
-            <h3 className="text-2xl font-bold text-gray-800 mb-8">⚙️ Settings</h3>
+            <h3 className="text-2xl font-bold text-gray-800 mb-8">Settings</h3>
 
             <div className="mb-10 bg-gray-50 p-6 rounded-lg border-2 border-gray-300">
-              <h4 className="text-lg font-bold text-gray-800 mb-4">ℹ️ Account Information</h4>
+              <h4 className="text-lg font-bold text-gray-800 mb-4">Account Information</h4>
               <p className="text-gray-700"><strong>Email:</strong> {user?.email}</p>
-              <p className="text-gray-700"><strong>Account Type:</strong> {user?.isAdmin ? "👑 Admin" : "👤 User"}</p>
+              <p className="text-gray-700"><strong>Account Type:</strong> {user?.isAdmin ? "Admin" : "User"}</p>
               <p className="text-gray-700"><strong>Member Since:</strong> {user?.memberSince}</p>
             </div>
 
@@ -243,7 +247,7 @@ export default function ProfilePage() {
               onClick={handleLogout}
               className="w-full px-8 py-4 bg-linear-to-r from-yellow-500 to-orange-500 hover:from-orange-600 hover:to-red-600 text-white rounded-lg font-bold text-lg shadow-lg"
             >
-              🚪 Logout
+              Logout
             </m.button>
           </m.div>
         )}

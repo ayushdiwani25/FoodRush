@@ -11,12 +11,16 @@ export default function Cart() {
     <div className="min-h-screen bg-linear-to-br from-orange-50/50 to-yellow-50/50 py-8 px-4 md:px-8 font-sans">
       <div className="max-w-6xl mx-auto">
         <h1 className="text-3xl md:text-4xl font-extrabold text-center text-neutral-900 mb-8 tracking-tight">
-          🛒 Your Shopping Cart
+          Your Shopping Cart
         </h1>
 
         {cartItems.length === 0 ? (
           <div className="text-center bg-white p-12 rounded-3xl shadow-xs border border-neutral-100 max-w-md mx-auto">
-            <div className="text-6xl mb-4" aria-hidden="true">🛒</div>
+            <div className="w-16 h-16 mx-auto mb-4 text-neutral-300 flex items-center justify-center" aria-hidden="true">
+              <svg className="w-14 h-14" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+              </svg>
+            </div>
             <h2 className="text-xl font-bold text-neutral-800 mb-2">Your cart is empty</h2>
             <p className="text-sm text-neutral-500 mb-6">Looks like you haven't added any delicious dishes yet.</p>
             <button
@@ -50,7 +54,7 @@ export default function Cart() {
                         <h2 className="font-extrabold text-base text-neutral-900">{item.name}</h2>
                         {item.restaurantName && (
                           <p className="text-xs text-orange-600 font-bold mt-0.5">
-                            🏪 From: {item.restaurantName}
+                            From: {item.restaurantName}
                           </p>
                         )}
                       </div>
@@ -145,7 +149,9 @@ export default function Cart() {
                 className="w-full bg-linear-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white py-3.5 rounded-xl font-extrabold text-base transition-all transform hover:scale-[1.02] shadow-md flex items-center justify-center gap-2 cursor-pointer min-h-[48px] focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:outline-none"
               >
                 <span>Proceed to Checkout</span>
-                <span aria-hidden="true">🚀</span>
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                </svg>
               </button>
             </aside>
           </div>
